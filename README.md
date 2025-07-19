@@ -2,8 +2,10 @@
 Centralized HTML report hosting for automated QA test results across multiple projects.
 
 ```
-report-pages/
+Branch: report-pages/
 index.html <– 自訂首頁，放報告清單
+
+路徑規則：
 ├── ProjectA/
 │   └── prod
 │       └── 20250101_000001
