@@ -405,9 +405,9 @@ function filter_table(elem) {
 }
 </script>
     <h1>Automation_Test_Report.html</h1>
-    <p>Report generated on 09-Sep-2025 at 02:02:44 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v2.0.1</p>
+    <p>Report generated on 17-Sep-2025 at 02:02:12 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v2.0.1</p>
     <h2>Summary</h2>
-    <p>2 tests ran in 90.09 seconds. </p>
+    <p>2 tests ran in 74.45 seconds. </p>
     <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">2 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>, <input checked="true" class="filter" data-test-result="rerun" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="rerun">0 rerun</span>
     <h2>Results</h2>
     <table id="results-table">
@@ -424,30 +424,28 @@ function filter_table(elem) {
           <td class="col-result">Passed</td>
           <td class="col-title"># 82043 [Insight] total user data validation</td>
           <td class="col-name">cases/navigation/test_overview.py::TestOverview::test_C54639</td>
-          <td class="col-duration">71.43</td></tr>
+          <td class="col-duration">33.08</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-09-09 02:01:14 [INFO] TestCase test_C54639: # 82043 [Insight] total user data validation (conftest.py:54)<br/> -------------------------------Captured log call-------------------------------- <br/>2025-09-09 02:02:24 [INFO] DACO Question - response_json: {&#x27;type&#x27;: &#x27;data-to-nl&#x27;, &#x27;requestId&#x27;: &#x27;8f02920c-95d8-4681-9d8d-d4cfafd95ebd&#x27;, &#x27;contexts&#x27;: [{&#x27;role&#x27;: &#x27;user&#x27;, &#x27;content&#x27;: &#x27;How many user do we have?&#x27;}, {&#x27;role&#x27;: &#x27;assistant&#x27;, &#x27;content&#x27;: &#x27;We have 10,951 users.&#x27;}]} (test_overview.py:28)
-2025-09-09 02:02:24 [INFO] DACO Answer: We have 10,951 users. (test_overview.py:30)
-2025-09-09 02:02:24 [INFO] DACO Answer - total_user_number: 10951 (test_overview.py:37)
-2025-09-09 02:02:25 [INFO] web_total_user_api: {&#x27;activated_count&#x27;: 10214, &#x27;non_activated_count&#x27;: 707} (test_overview.py:43)
-2025-09-09 02:02:25 [INFO] web_total_user: 10921 (test_overview.py:44)
-2025-09-09 02:02:25 [INFO] DACO 與 API 取得使用者數的差異絕對值: 30 (test_overview.py:45)
-2025-09-09 02:02:25 [INFO] API的容錯值(5%): 546 (test_overview.py:46)
-2025-09-09 02:02:25 [INFO] Pipeline input TESTRUN_ID:  (customize_case.py:21)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-09-17 02:00:58 [INFO] TestCase test_C54639: # 82043 [Insight] total user data validation (conftest.py:54)<br/> -------------------------------Captured log call-------------------------------- <br/>2025-09-17 02:01:26 [INFO] DACO Question - response_json: {&#x27;type&#x27;: &#x27;data-to-nl&#x27;, &#x27;requestId&#x27;: &#x27;ee9d9ed9-2068-4642-a2e3-db5bbc33a7c9&#x27;, &#x27;contexts&#x27;: [{&#x27;role&#x27;: &#x27;user&#x27;, &#x27;content&#x27;: &#x27;How many user do we have?&#x27;}, {&#x27;role&#x27;: &#x27;assistant&#x27;, &#x27;content&#x27;: &#x27;We have 10,951 users.&#x27;}]} (test_overview.py:28)
+2025-09-17 02:01:26 [INFO] DACO Answer: We have 10,951 users. (test_overview.py:30)
+2025-09-17 02:01:26 [INFO] DACO Answer - total_user_number: 10951 (test_overview.py:37)
+2025-09-17 02:01:31 [INFO] web_total_user_api: {&#x27;activated_count&#x27;: 10214, &#x27;non_activated_count&#x27;: 707} (test_overview.py:43)
+2025-09-17 02:01:31 [INFO] web_total_user: 10921 (test_overview.py:44)
+2025-09-17 02:01:31 [INFO] DACO 與 API 取得使用者數的差異絕對值: 30 (test_overview.py:45)
+2025-09-17 02:01:31 [INFO] API的容錯值(5%): 546 (test_overview.py:46)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-title"># 74009 [Insight] active device data validation</td>
           <td class="col-name">cases/products/manager/test_products_manager_overview.py::TestProductsManagerOverview::test_C54632</td>
-          <td class="col-duration">18.62</td></tr>
+          <td class="col-duration">41.33</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-09-09 02:02:25 [INFO] TestCase test_C54632: # 74009 [Insight] active device data validation (conftest.py:54)<br/> -------------------------------Captured log call-------------------------------- <br/>2025-09-09 02:02:40 [INFO] Since: 1756749760670 (test_products_manager_overview.py:27)
-2025-09-09 02:02:40 [INFO] Until: 1757354560670 (test_products_manager_overview.py:28)
-2025-09-09 02:02:43 [INFO] DACO Question - response_json: {&#x27;type&#x27;: &#x27;data-to-nl&#x27;, &#x27;requestId&#x27;: &#x27;956e2e18-4c48-4d43-a513-730cb0d9c654&#x27;, &#x27;contexts&#x27;: [{&#x27;role&#x27;: &#x27;user&#x27;, &#x27;content&#x27;: &#x27;How many panel launched on 2025-09-06?&#x27;}, {&#x27;role&#x27;: &#x27;assistant&#x27;, &#x27;content&#x27;: &#x27;On September 6, 2025, 14 panels were launched.&#x27;}]} (test_products_manager_overview.py:36)
-2025-09-09 02:02:43 [INFO] DACO Answer: On September 6, 2025, 14 panels were launched. (test_products_manager_overview.py:38)
-2025-09-09 02:02:43 [INFO] DACO Answer - panel_number: 14 (test_products_manager_overview.py:48)
-2025-09-09 02:02:44 [INFO] entity_manager_enroll_active_device: [{&#x27;date&#x27;: &#x27;2025-09-02&#x27;, &#x27;active_device_count&#x27;: &#x27;14&#x27;}, {&#x27;date&#x27;: &#x27;2025-09-03&#x27;, &#x27;active_device_count&#x27;: &#x27;16&#x27;}, {&#x27;date&#x27;: &#x27;2025-09-04&#x27;, &#x27;active_device_count&#x27;: &#x27;6&#x27;}, {&#x27;date&#x27;: &#x27;2025-09-05&#x27;, &#x27;active_device_count&#x27;: &#x27;10&#x27;}, {&#x27;date&#x27;: &#x27;2025-09-06&#x27;, &#x27;active_device_count&#x27;: &#x27;14&#x27;}, {&#x27;date&#x27;: &#x27;2025-09-07&#x27;, &#x27;active_device_count&#x27;: &#x27;16&#x27;}] (test_products_manager_overview.py:57)
-2025-09-09 02:02:44 [INFO] active_device_count: 14 (test_products_manager_overview.py:63)
-2025-09-09 02:02:44 [INFO] Pipeline input TESTRUN_ID:  (customize_case.py:21)<br/></div></td></tr></tbody></table></body></html>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-09-17 02:01:31 [INFO] TestCase test_C54632: # 74009 [Insight] active device data validation (conftest.py:54)<br/> -------------------------------Captured log call-------------------------------- <br/>2025-09-17 02:01:45 [INFO] Since: 1757440905329 (test_products_manager_overview.py:27)
+2025-09-17 02:01:45 [INFO] Until: 1758045705329 (test_products_manager_overview.py:28)
+2025-09-17 02:02:11 [INFO] DACO Question - response_json: {&#x27;type&#x27;: &#x27;data-to-nl&#x27;, &#x27;requestId&#x27;: &#x27;660558bd-f51d-4ab7-b1a0-4d11a281ef31&#x27;, &#x27;contexts&#x27;: [{&#x27;role&#x27;: &#x27;user&#x27;, &#x27;content&#x27;: &#x27;How many panel launched on 2025-09-14?&#x27;}, {&#x27;role&#x27;: &#x27;assistant&#x27;, &#x27;content&#x27;: &#x27;On September 14, 2025, there were 8 panels launched.&#x27;}]} (test_products_manager_overview.py:36)
+2025-09-17 02:02:11 [INFO] DACO Answer: On September 14, 2025, there were 8 panels launched. (test_products_manager_overview.py:38)
+2025-09-17 02:02:11 [INFO] DACO Answer - panel_number: 8 (test_products_manager_overview.py:48)
+2025-09-17 02:02:12 [INFO] entity_manager_enroll_active_device: [{&#x27;date&#x27;: &#x27;2025-09-10&#x27;, &#x27;active_device_count&#x27;: &#x27;23&#x27;}, {&#x27;date&#x27;: &#x27;2025-09-11&#x27;, &#x27;active_device_count&#x27;: &#x27;14&#x27;}, {&#x27;date&#x27;: &#x27;2025-09-12&#x27;, &#x27;active_device_count&#x27;: &#x27;21&#x27;}, {&#x27;date&#x27;: &#x27;2025-09-13&#x27;, &#x27;active_device_count&#x27;: &#x27;13&#x27;}, {&#x27;date&#x27;: &#x27;2025-09-14&#x27;, &#x27;active_device_count&#x27;: &#x27;8&#x27;}, {&#x27;date&#x27;: &#x27;2025-09-15&#x27;, &#x27;active_device_count&#x27;: &#x27;25&#x27;}] (test_products_manager_overview.py:57)
+2025-09-17 02:02:12 [INFO] active_device_count: 8 (test_products_manager_overview.py:63)<br/></div></td></tr></tbody></table></body></html>
