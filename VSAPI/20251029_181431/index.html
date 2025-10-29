@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Test Report</title>
+    <style>body {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	/* do not increase min-width as some may use split screens */
+	min-width: 800px;
+	color: #999;
+}
+
+h1 {
+	font-size: 24px;
+	color: black;
+}
+
+h2 {
+	font-size: 16px;
+	color: black;
+}
+
+p {
+    color: black;
+}
+
+a {
+	color: #999;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+/******************************
+ * SUMMARY INFORMATION
+ ******************************/
+
+#environment td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+}
+
+#environment tr:nth-child(odd) {
+	background-color: #f6f6f6;
+}
+
+/******************************
+ * TEST RESULT COLORS
+ ******************************/
+span.passed, .passed .col-result {
+	color: green;
+}
+span.skipped, span.xfailed, span.rerun, .skipped .col-result, .xfailed .col-result, .rerun .col-result {
+	color: orange;
+}
+span.error, span.failed, span.xpassed, .error .col-result, .failed .col-result, .xpassed .col-result  {
+	color: red;
+}
+
+
+/******************************
+ * RESULTS TABLE
+ *
+ * 1. Table Layout
+ * 2. Extra
+ * 3. Sorting items
+ *
+ ******************************/
+
+/*------------------
+ * 1. Table Layout
+ *------------------*/
+
+#results-table {
+	border: 1px solid #e6e6e6;
+	color: #999;
+	font-size: 12px;
+	width: 100%
+}
+
+#results-table th, #results-table td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+	text-align: left
+}
+#results-table th {
+	font-weight: bold
+}
+
+/*------------------
+ * 2. Extra
+ *------------------*/
+
+.log:only-child {
+	height: inherit
+}
+.log {
+	background-color: #e6e6e6;
+	border: 1px solid #e6e6e6;
+	color: black;
+	display: block;
+	font-family: "Courier New", Courier, monospace;
+	height: 230px;
+	overflow-y: scroll;
+	padding: 5px;
+	white-space: pre-wrap
+}
+div.image {
+	border: 1px solid #e6e6e6;
+	float: right;
+	height: 240px;
+	margin-left: 5px;
+	overflow: hidden;
+	width: 320px
+}
+div.image img {
+	width: 320px
+}
+.collapsed {
+	display: none;
+}
+.expander::after {
+	content: " (show details)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+.collapser::after {
+	content: " (hide details)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+
+/*------------------
+ * 3. Sorting items
+ *------------------*/
+.sortable {
+	cursor: pointer;
+}
+
+.sort-icon {
+	font-size: 0px;
+	float: left;
+	margin-right: 5px;
+	margin-top: 5px;
+	/*triangle*/
+	width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+}
+
+.inactive .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #E6E6E6;
+}
+
+.asc.active .sort-icon {
+	/*finish triangle*/
+	border-bottom: 8px solid #999;
+}
+
+.desc.active .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #999;
+}
+</style></head>
+  <body onLoad="init()">
+    <script>/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+function toArray(iter) {
+    if (iter === null) {
+        return null;
+    }
+    return Array.prototype.slice.call(iter);
+}
+
+function find(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return elem.querySelector(selector);
+}
+
+function find_all(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return toArray(elem.querySelectorAll(selector));
+}
+
+function sort_column(elem) {
+    toggle_sort_states(elem);
+    var colIndex = toArray(elem.parentNode.childNodes).indexOf(elem);
+    var key;
+    if (elem.classList.contains('numeric')) {
+        key = key_num;
+    } else if (elem.classList.contains('result')) {
+        key = key_result;
+    } else {
+        key = key_alpha;
+    }
+    sort_table(elem, key(colIndex));
+}
+
+function show_all_extras() {
+    find_all('.col-result').forEach(show_extras);
+}
+
+function hide_all_extras() {
+    find_all('.col-result').forEach(hide_extras);
+}
+
+function show_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.remove("collapsed");
+    expandcollapse.classList.remove("expander");
+    expandcollapse.classList.add("collapser");
+}
+
+function hide_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.add("collapsed");
+    expandcollapse.classList.remove("collapser");
+    expandcollapse.classList.add("expander");
+}
+
+function show_filters() {
+    var filter_items = document.getElementsByClassName('filter');
+    for (var i = 0; i < filter_items.length; i++)
+        filter_items[i].hidden = false;
+}
+
+function add_collapse() {
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">Show all details</a> / ' +
+                            '<a href="javascript:hide_all_extras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+
+    // Add show/hide link to each result
+    find_all('.col-result').forEach(function(elem) {
+        var collapsed = get_query_parameter('collapsed') || 'Passed';
+        var extras = elem.parentNode.nextElementSibling;
+        var expandcollapse = document.createElement("span");
+        if (collapsed.includes(elem.innerHTML)) {
+            extras.classList.add("collapsed");
+            expandcollapse.classList.add("expander");
+        } else {
+            expandcollapse.classList.add("collapser");
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener("click", function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains("collapsed")) {
+                show_extras(event.currentTarget);
+            } else {
+                hide_extras(event.currentTarget);
+            }
+        });
+    })
+}
+
+function get_query_parameter(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function init () {
+    reset_sort_headers();
+
+    add_collapse();
+
+    show_filters();
+
+    sort_column(find('.initial-sort'));
+
+    find_all('.sortable').forEach(function(elem) {
+        elem.addEventListener("click",
+                              function(event) {
+                                  sort_column(elem);
+                              }, false)
+    });
+
+};
+
+function sort_table(clicked, key_func) {
+    var rows = find_all('.results-table-row');
+    var reversed = !clicked.classList.contains('asc');
+    var sorted_rows = sort(rows, key_func, reversed);
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    var thead = document.getElementById("results-table-head");
+    document.getElementById('results-table').remove();
+    var parent = document.createElement("table");
+    parent.id = "results-table";
+    parent.appendChild(thead);
+    sorted_rows.forEach(function(elem) {
+        parent.appendChild(elem);
+    });
+    document.getElementsByTagName("BODY")[0].appendChild(parent);
+}
+
+function sort(items, key_func, reversed) {
+    var sort_array = items.map(function(item, i) {
+        return [key_func(item), i];
+    });
+
+    sort_array.sort(function(a, b) {
+        var key_a = a[0];
+        var key_b = b[0];
+
+        if (key_a == key_b) return 0;
+
+        if (reversed) {
+            return (key_a < key_b ? 1 : -1);
+        } else {
+            return (key_a > key_b ? 1 : -1);
+        }
+    });
+
+    return sort_array.map(function(item) {
+        var index = item[1];
+        return items[index];
+    });
+}
+
+function key_alpha(col_index) {
+    return function(elem) {
+        return elem.childNodes[1].childNodes[col_index].firstChild.data.toLowerCase();
+    };
+}
+
+function key_num(col_index) {
+    return function(elem) {
+        return parseFloat(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function key_result(col_index) {
+    return function(elem) {
+        var strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+                       'Skipped', 'Passed'];
+        return strings.indexOf(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function reset_sort_headers() {
+    find_all('.sort-icon').forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    });
+    find_all('.sortable').forEach(function(elem) {
+        var icon = document.createElement("div");
+        icon.className = "sort-icon";
+        icon.textContent = "vvv";
+        elem.insertBefore(icon, elem.firstChild);
+        elem.classList.remove("desc", "active");
+        elem.classList.add("asc", "inactive");
+    });
+}
+
+function toggle_sort_states(elem) {
+    //if active, toggle between asc and desc
+    if (elem.classList.contains('active')) {
+        elem.classList.toggle('asc');
+        elem.classList.toggle('desc');
+    }
+
+    //if inactive, reset all other functions and add ascending active
+    if (elem.classList.contains('inactive')) {
+        reset_sort_headers();
+        elem.classList.remove('inactive');
+        elem.classList.add('active');
+    }
+}
+
+function is_all_rows_hidden(value) {
+  return value.hidden == false;
+}
+
+function filter_table(elem) {
+    var outcome_att = "data-test-result";
+    var outcome = elem.getAttribute(outcome_att);
+    class_outcome = outcome + " results-table-row";
+    var outcome_rows = document.getElementsByClassName(class_outcome);
+
+    for(var i = 0; i < outcome_rows.length; i++){
+        outcome_rows[i].hidden = !elem.checked;
+    }
+
+    var rows = find_all('.results-table-row').filter(is_all_rows_hidden);
+    var all_rows_hidden = rows.length == 0 ? true : false;
+    var not_found_message = document.getElementById("not-found-message");
+    not_found_message.hidden = !all_rows_hidden;
+}
+</script>
+    <h1>Automation_Test_Report.html</h1>
+    <p>Report generated on 29-Oct-2025 at 18:16:00 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v2.0.1</p>
+    <h2>Summary</h2>
+    <p>101 tests ran in 81.24 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">13 passed</span>, <input checked="true" class="filter" data-test-result="skipped" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">1 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">88 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>, <input checked="true" class="filter" data-test-result="rerun" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="rerun">0 rerun</span>
+    <h2>Results</h2>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable result initial-sort" col="result">Result</th>
+          <th class="sortable" col="col-title">Description</th>
+          <th class="sortable" col="name">Test</th>
+          <th class="sortable numeric" col="duration">Duration</th></tr>
+        <tr hidden="true" id="not-found-message">
+          <th colspan="4">No results found. Try to check the filters</th></tr></thead>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setEyeCareEnabled</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_eye_care_enabled[False]</td>
+          <td class="col-duration">3.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c970610&gt;<br/>expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_set_eye_care_enabled(self, expected):<br/>        &quot;&quot;&quot;Test setEyeCareEnabled&quot;&quot;&quot;<br/>        set_eye_care_enabled(expected)<br/>&gt;       actual = get_eye_care_enabled()<br/><br/>cases/test_picture.py:179: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:16: in get_eye_care_enabled<br/>    return ifp_delegate.dispatch(&quot;getEyeCareEnabled&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getEyeCareEnabled&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:56 [INFO] TestCase test_set_eye_care_enabled: Test setEyeCareEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getEyeCareEnabled</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_eye_care_enabled[True]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c970d00&gt;<br/>expected = True<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_eye_care_enabled(self, expected):<br/>        &quot;&quot;&quot;Test getEyeCareEnabled&quot;&quot;&quot;<br/>&gt;       set_eye_care_enabled(expected)<br/><br/>cases/test_picture.py:185: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:12: in set_eye_care_enabled<br/>    ifp_delegate.dispatch(&quot;setEyeCareEnabled&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setEyeCareEnabled&#x27;, data = True, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_eye_care_enabled: Test getEyeCareEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getEyeCareEnabled</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_eye_care_enabled[False]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c970ac0&gt;<br/>expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_eye_care_enabled(self, expected):<br/>        &quot;&quot;&quot;Test getEyeCareEnabled&quot;&quot;&quot;<br/>&gt;       set_eye_care_enabled(expected)<br/><br/>cases/test_picture.py:185: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:12: in set_eye_care_enabled<br/>    ifp_delegate.dispatch(&quot;setEyeCareEnabled&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setEyeCareEnabled&#x27;, data = False, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_eye_care_enabled: Test getEyeCareEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setBacklightAutoEnabled</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_backlight_auto_enabled[True]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c971270&gt;<br/>expected = True<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_set_backlight_auto_enabled(self, expected):<br/>        &quot;&quot;&quot;Test setBacklightAutoEnabled&quot;&quot;&quot;<br/>&gt;       set_backlight_auto_enabled(expected)<br/><br/>cases/test_picture.py:192: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:20: in set_backlight_auto_enabled<br/>    ifp_delegate.dispatch(&quot;setBacklightAutoEnabled&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setBacklightAutoEnabled&#x27;, data = True, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_set_backlight_auto_enabled: Test setBacklightAutoEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setBacklightAutoEnabled</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_backlight_auto_enabled[False]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9711e0&gt;<br/>expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_set_backlight_auto_enabled(self, expected):<br/>        &quot;&quot;&quot;Test setBacklightAutoEnabled&quot;&quot;&quot;<br/>&gt;       set_backlight_auto_enabled(expected)<br/><br/>cases/test_picture.py:192: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:20: in set_backlight_auto_enabled<br/>    ifp_delegate.dispatch(&quot;setBacklightAutoEnabled&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setBacklightAutoEnabled&#x27;, data = False, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_set_backlight_auto_enabled: Test setBacklightAutoEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getBacklightAutoEnabled</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_auto_enabled[True]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c971030&gt;<br/>expected = True<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_backlight_auto_enabled(self, expected):<br/>        &quot;&quot;&quot;Test getBacklightAutoEnabled&quot;&quot;&quot;<br/>&gt;       set_backlight_auto_enabled(expected)<br/><br/>cases/test_picture.py:199: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:20: in set_backlight_auto_enabled<br/>    ifp_delegate.dispatch(&quot;setBacklightAutoEnabled&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setBacklightAutoEnabled&#x27;, data = True, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_backlight_auto_enabled: Test getBacklightAutoEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getBacklightAutoEnabled</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_auto_enabled[False]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c971600&gt;<br/>expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_backlight_auto_enabled(self, expected):<br/>        &quot;&quot;&quot;Test getBacklightAutoEnabled&quot;&quot;&quot;<br/>&gt;       set_backlight_auto_enabled(expected)<br/><br/>cases/test_picture.py:199: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:20: in set_backlight_auto_enabled<br/>    ifp_delegate.dispatch(&quot;setBacklightAutoEnabled&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setBacklightAutoEnabled&#x27;, data = False, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_backlight_auto_enabled: Test getBacklightAutoEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setBacklightLevel</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_backlight_level[0]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9713c0&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_backlight_level(self, expected):<br/>        &quot;&quot;&quot;Test setBacklightLevel&quot;&quot;&quot;<br/>&gt;       set_backlight_level(expected)<br/><br/>cases/test_picture.py:206: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:28: in set_backlight_level<br/>    ifp_delegate.dispatch(&quot;setBacklightLevel&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setBacklightLevel&#x27;, data = 0, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setBacklightLevel</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_backlight_level[50]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c971510&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_backlight_level(self, expected):<br/>        &quot;&quot;&quot;Test setBacklightLevel&quot;&quot;&quot;<br/>&gt;       set_backlight_level(expected)<br/><br/>cases/test_picture.py:206: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:28: in set_backlight_level<br/>    ifp_delegate.dispatch(&quot;setBacklightLevel&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setBacklightLevel&#x27;, data = 50, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setBacklightLevel</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_backlight_level[100]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c972080&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_backlight_level(self, expected):<br/>        &quot;&quot;&quot;Test setBacklightLevel&quot;&quot;&quot;<br/>&gt;       set_backlight_level(expected)<br/><br/>cases/test_picture.py:206: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:28: in set_backlight_level<br/>    ifp_delegate.dispatch(&quot;setBacklightLevel&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setBacklightLevel&#x27;, data = 100, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getBacklightLevel</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_level[0]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c972230&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_backlight_level(self, expected):<br/>        &quot;&quot;&quot;Test getBacklightLevel&quot;&quot;&quot;<br/>&gt;       set_backlight_level(expected)<br/><br/>cases/test_picture.py:213: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:28: in set_backlight_level<br/>    ifp_delegate.dispatch(&quot;setBacklightLevel&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setBacklightLevel&#x27;, data = 0, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getBacklightLevel</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_level[50]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9721a0&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_backlight_level(self, expected):<br/>        &quot;&quot;&quot;Test getBacklightLevel&quot;&quot;&quot;<br/>&gt;       set_backlight_level(expected)<br/><br/>cases/test_picture.py:213: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:28: in set_backlight_level<br/>    ifp_delegate.dispatch(&quot;setBacklightLevel&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setBacklightLevel&#x27;, data = 50, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getBacklightLevel</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_level[100]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c971ff0&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_backlight_level(self, expected):<br/>        &quot;&quot;&quot;Test getBacklightLevel&quot;&quot;&quot;<br/>&gt;       set_backlight_level(expected)<br/><br/>cases/test_picture.py:213: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:28: in set_backlight_level<br/>    ifp_delegate.dispatch(&quot;setBacklightLevel&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setBacklightLevel&#x27;, data = 100, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getBacklightSupport</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_support</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c971d80&gt;<br/><br/>    def test_get_backlight_support(self):<br/>        &quot;&quot;&quot;Test getBacklightSupport&quot;&quot;&quot;<br/>&gt;       actual = is_backlight_supported()<br/><br/>cases/test_picture.py:219: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:36: in is_backlight_supported<br/>    return ifp_delegate.dispatch(&quot;isBacklightSupported&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;isBacklightSupported&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_backlight_support: Test getBacklightSupport (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test CurrentSource</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_current_source[HDMI1]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9726b0&gt;<br/>expected = &#x27;HDMI1&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;HDMI1&quot;, &quot;TYPE_C&quot;, &quot;ANDROID&quot;])<br/>    def test_get_current_source(self, expected):<br/>        &quot;&quot;&quot;Test CurrentSource&quot;&quot;&quot;<br/>&gt;       switch_source(expected)<br/><br/>cases/test_picture.py:225: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:60: in switch_source<br/>    ifp_delegate.dispatch(&quot;setSource&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setSource&#x27;, data = &#x27;HDMI1&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_current_source: Test CurrentSource (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test CurrentSource</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_current_source[TYPE_C]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c972380&gt;<br/>expected = &#x27;TYPE_C&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;HDMI1&quot;, &quot;TYPE_C&quot;, &quot;ANDROID&quot;])<br/>    def test_get_current_source(self, expected):<br/>        &quot;&quot;&quot;Test CurrentSource&quot;&quot;&quot;<br/>&gt;       switch_source(expected)<br/><br/>cases/test_picture.py:225: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:60: in switch_source<br/>    ifp_delegate.dispatch(&quot;setSource&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setSource&#x27;, data = &#x27;TYPE_C&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_current_source: Test CurrentSource (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test CurrentSource</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_current_source[ANDROID]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c972110&gt;<br/>expected = &#x27;ANDROID&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;HDMI1&quot;, &quot;TYPE_C&quot;, &quot;ANDROID&quot;])<br/>    def test_get_current_source(self, expected):<br/>        &quot;&quot;&quot;Test CurrentSource&quot;&quot;&quot;<br/>&gt;       switch_source(expected)<br/><br/>cases/test_picture.py:225: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:60: in switch_source<br/>    ifp_delegate.dispatch(&quot;setSource&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setSource&#x27;, data = &#x27;ANDROID&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_current_source: Test CurrentSource (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test switchSource</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_switch_source[HDMI1]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c970dc0&gt;<br/>expected = &#x27;HDMI1&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;HDMI1&quot;, &quot;TYPE_C&quot;, &quot;ANDROID&quot;])<br/>    def test_switch_source(self, expected):<br/>        &quot;&quot;&quot;Test switchSource&quot;&quot;&quot;<br/>&gt;       switch_source(expected)<br/><br/>cases/test_picture.py:232: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:60: in switch_source<br/>    ifp_delegate.dispatch(&quot;setSource&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setSource&#x27;, data = &#x27;HDMI1&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test switchSource</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_switch_source[TYPE_C]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c970ca0&gt;<br/>expected = &#x27;TYPE_C&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;HDMI1&quot;, &quot;TYPE_C&quot;, &quot;ANDROID&quot;])<br/>    def test_switch_source(self, expected):<br/>        &quot;&quot;&quot;Test switchSource&quot;&quot;&quot;<br/>&gt;       switch_source(expected)<br/><br/>cases/test_picture.py:232: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:60: in switch_source<br/>    ifp_delegate.dispatch(&quot;setSource&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setSource&#x27;, data = &#x27;TYPE_C&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test switchSource</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_switch_source[ANDROID]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c972500&gt;<br/>expected = &#x27;ANDROID&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;HDMI1&quot;, &quot;TYPE_C&quot;, &quot;ANDROID&quot;])<br/>    def test_switch_source(self, expected):<br/>        &quot;&quot;&quot;Test switchSource&quot;&quot;&quot;<br/>&gt;       switch_source(expected)<br/><br/>cases/test_picture.py:232: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:60: in switch_source<br/>    ifp_delegate.dispatch(&quot;setSource&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setSource&#x27;, data = &#x27;ANDROID&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setSourceAliasEnable</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_source_alias_enable[True]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c972b90&gt;<br/>expected = True<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_set_source_alias_enable(self, expected):<br/>        &quot;&quot;&quot;Test setSourceAliasEnable&quot;&quot;&quot;<br/>&gt;       set_source_alias_enable(expected)<br/><br/>cases/test_picture.py:239: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:64: in set_source_alias_enable<br/>    ifp_delegate.dispatch(&quot;setSourceAliasEnable&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setSourceAliasEnable&#x27;, data = True, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_set_source_alias_enable: Test setSourceAliasEnable (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setSourceAliasEnable</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_source_alias_enable[False]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c972ce0&gt;<br/>expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_set_source_alias_enable(self, expected):<br/>        &quot;&quot;&quot;Test setSourceAliasEnable&quot;&quot;&quot;<br/>&gt;       set_source_alias_enable(expected)<br/><br/>cases/test_picture.py:239: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:64: in set_source_alias_enable<br/>    ifp_delegate.dispatch(&quot;setSourceAliasEnable&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setSourceAliasEnable&#x27;, data = False, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_set_source_alias_enable: Test setSourceAliasEnable (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getSourceAliasEnable</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_source_alias_enable[True]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c972a10&gt;<br/>expected = True<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_source_alias_enable(self, expected):<br/>        &quot;&quot;&quot;Test getSourceAliasEnable&quot;&quot;&quot;<br/>&gt;       set_source_alias_enable(expected)<br/><br/>cases/test_picture.py:246: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:64: in set_source_alias_enable<br/>    ifp_delegate.dispatch(&quot;setSourceAliasEnable&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setSourceAliasEnable&#x27;, data = True, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_source_alias_enable: Test getSourceAliasEnable (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getSourceAliasEnable</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_source_alias_enable[False]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c972b60&gt;<br/>expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_source_alias_enable(self, expected):<br/>        &quot;&quot;&quot;Test getSourceAliasEnable&quot;&quot;&quot;<br/>&gt;       set_source_alias_enable(expected)<br/><br/>cases/test_picture.py:246: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:64: in set_source_alias_enable<br/>    ifp_delegate.dispatch(&quot;setSourceAliasEnable&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setSourceAliasEnable&#x27;, data = False, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_source_alias_enable: Test getSourceAliasEnable (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setPictureMode</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_picture_mode[PICTURE_CUSTOM]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c973280&gt;<br/>expected = &#x27;PICTURE_CUSTOM&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;PICTURE_CUSTOM&quot;, &quot;PICTURE_STANDARD&quot;, &quot;PICTURE_SOFT&quot;, &quot;PICTURE_BRIGHT&quot;])<br/>    def test_set_picture_mode(self, expected):<br/>        &quot;&quot;&quot;Test setPictureMode&quot;&quot;&quot;<br/>&gt;       set_picture_mode(expected)<br/><br/>cases/test_picture.py:253: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:72: in set_picture_mode<br/>    ifp_delegate.dispatch(&quot;setPictureMode&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setPictureMode&#x27;, data = &#x27;PICTURE_CUSTOM&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setPictureMode</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_picture_mode[PICTURE_STANDARD]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c972e00&gt;<br/>expected = &#x27;PICTURE_STANDARD&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;PICTURE_CUSTOM&quot;, &quot;PICTURE_STANDARD&quot;, &quot;PICTURE_SOFT&quot;, &quot;PICTURE_BRIGHT&quot;])<br/>    def test_set_picture_mode(self, expected):<br/>        &quot;&quot;&quot;Test setPictureMode&quot;&quot;&quot;<br/>&gt;       set_picture_mode(expected)<br/><br/>cases/test_picture.py:253: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:72: in set_picture_mode<br/>    ifp_delegate.dispatch(&quot;setPictureMode&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setPictureMode&#x27;, data = &#x27;PICTURE_STANDARD&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setPictureMode</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_picture_mode[PICTURE_SOFT]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9730d0&gt;<br/>expected = &#x27;PICTURE_SOFT&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;PICTURE_CUSTOM&quot;, &quot;PICTURE_STANDARD&quot;, &quot;PICTURE_SOFT&quot;, &quot;PICTURE_BRIGHT&quot;])<br/>    def test_set_picture_mode(self, expected):<br/>        &quot;&quot;&quot;Test setPictureMode&quot;&quot;&quot;<br/>&gt;       set_picture_mode(expected)<br/><br/>cases/test_picture.py:253: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:72: in set_picture_mode<br/>    ifp_delegate.dispatch(&quot;setPictureMode&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setPictureMode&#x27;, data = &#x27;PICTURE_SOFT&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setPictureMode</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_picture_mode[PICTURE_BRIGHT]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c972da0&gt;<br/>expected = &#x27;PICTURE_BRIGHT&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;PICTURE_CUSTOM&quot;, &quot;PICTURE_STANDARD&quot;, &quot;PICTURE_SOFT&quot;, &quot;PICTURE_BRIGHT&quot;])<br/>    def test_set_picture_mode(self, expected):<br/>        &quot;&quot;&quot;Test setPictureMode&quot;&quot;&quot;<br/>&gt;       set_picture_mode(expected)<br/><br/>cases/test_picture.py:253: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:72: in set_picture_mode<br/>    ifp_delegate.dispatch(&quot;setPictureMode&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setPictureMode&#x27;, data = &#x27;PICTURE_BRIGHT&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getPictureMode</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_picture_mode[PICTURE_CUSTOM]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c973d90&gt;<br/>expected = &#x27;PICTURE_CUSTOM&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;PICTURE_CUSTOM&quot;, &quot;PICTURE_STANDARD&quot;, &quot;PICTURE_SOFT&quot;, &quot;PICTURE_BRIGHT&quot;])<br/>    def test_get_picture_mode(self, expected):<br/>        &quot;&quot;&quot;Test getPictureMode&quot;&quot;&quot;<br/>&gt;       set_picture_mode(expected)<br/><br/>cases/test_picture.py:260: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:72: in set_picture_mode<br/>    ifp_delegate.dispatch(&quot;setPictureMode&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setPictureMode&#x27;, data = &#x27;PICTURE_CUSTOM&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getPictureMode</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_picture_mode[PICTURE_STANDARD]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9732e0&gt;<br/>expected = &#x27;PICTURE_STANDARD&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;PICTURE_CUSTOM&quot;, &quot;PICTURE_STANDARD&quot;, &quot;PICTURE_SOFT&quot;, &quot;PICTURE_BRIGHT&quot;])<br/>    def test_get_picture_mode(self, expected):<br/>        &quot;&quot;&quot;Test getPictureMode&quot;&quot;&quot;<br/>&gt;       set_picture_mode(expected)<br/><br/>cases/test_picture.py:260: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:72: in set_picture_mode<br/>    ifp_delegate.dispatch(&quot;setPictureMode&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setPictureMode&#x27;, data = &#x27;PICTURE_STANDARD&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getPictureMode</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_picture_mode[PICTURE_SOFT]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c973f40&gt;<br/>expected = &#x27;PICTURE_SOFT&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;PICTURE_CUSTOM&quot;, &quot;PICTURE_STANDARD&quot;, &quot;PICTURE_SOFT&quot;, &quot;PICTURE_BRIGHT&quot;])<br/>    def test_get_picture_mode(self, expected):<br/>        &quot;&quot;&quot;Test getPictureMode&quot;&quot;&quot;<br/>&gt;       set_picture_mode(expected)<br/><br/>cases/test_picture.py:260: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:72: in set_picture_mode<br/>    ifp_delegate.dispatch(&quot;setPictureMode&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setPictureMode&#x27;, data = &#x27;PICTURE_SOFT&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getPictureMode</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_picture_mode[PICTURE_BRIGHT]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c973c10&gt;<br/>expected = &#x27;PICTURE_BRIGHT&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;PICTURE_CUSTOM&quot;, &quot;PICTURE_STANDARD&quot;, &quot;PICTURE_SOFT&quot;, &quot;PICTURE_BRIGHT&quot;])<br/>    def test_get_picture_mode(self, expected):<br/>        &quot;&quot;&quot;Test getPictureMode&quot;&quot;&quot;<br/>&gt;       set_picture_mode(expected)<br/><br/>cases/test_picture.py:260: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:72: in set_picture_mode<br/>    ifp_delegate.dispatch(&quot;setPictureMode&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setPictureMode&#x27;, data = &#x27;PICTURE_BRIGHT&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getAllPictureModeList</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_all_picture_mode_list</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c973bb0&gt;<br/><br/>    def test_get_all_picture_mode_list(self):<br/>        &quot;&quot;&quot;Test getAllPictureModeList&quot;&quot;&quot;<br/>&gt;       actual = get_all_picture_mode_list()<br/><br/>cases/test_picture.py:266: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:80: in get_all_picture_mode_list<br/>    return ifp_delegate.dispatch(&quot;getAllPictureModeList&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getAllPictureModeList&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_all_picture_mode_list: Test getAllPictureModeList (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setContrast</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_contrast[0]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c973430&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_contrast(self, expected):<br/>        &quot;&quot;&quot;Test setContrast&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:273: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setContrast</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_contrast[50]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c973370&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_contrast(self, expected):<br/>        &quot;&quot;&quot;Test setContrast&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:273: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setContrast</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_contrast[100]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9736d0&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_contrast(self, expected):<br/>        &quot;&quot;&quot;Test setContrast&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:273: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getContrast</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_contrast[0]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c971810&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_contrast(self, expected):<br/>        &quot;&quot;&quot;Test getContrast&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:283: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getContrast</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_contrast[50]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c973340&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_contrast(self, expected):<br/>        &quot;&quot;&quot;Test getContrast&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:283: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getContrast</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_contrast[100]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c971a20&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_contrast(self, expected):<br/>        &quot;&quot;&quot;Test getContrast&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:283: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test isContrastSupported</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_is_contrast_supported</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9718d0&gt;<br/><br/>    def test_is_contrast_supported(self):<br/>        &quot;&quot;&quot;Test isContrastSupported&quot;&quot;&quot;<br/>&gt;       switch_to_android()<br/><br/>cases/test_picture.py:292: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:156: in switch_to_android<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_is_contrast_supported: Test isContrastSupported (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setSaturation</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_saturation[0]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c973f10&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_saturation(self, expected):<br/>        &quot;&quot;&quot;Test setSaturation&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:309: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setSaturation</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_saturation[50]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c973dc0&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_saturation(self, expected):<br/>        &quot;&quot;&quot;Test setSaturation&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:309: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setSaturation</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_saturation[100]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c972920&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_saturation(self, expected):<br/>        &quot;&quot;&quot;Test setSaturation&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:309: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getSaturation</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_saturation[0]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9700a0&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_saturation(self, expected):<br/>        &quot;&quot;&quot;Test getSaturation&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:319: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getSaturation</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_saturation[50]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c971ab0&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_saturation(self, expected):<br/>        &quot;&quot;&quot;Test getSaturation&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:319: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:59 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getSaturation</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_saturation[100]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c970790&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_saturation(self, expected):<br/>        &quot;&quot;&quot;Test getSaturation&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:319: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test isSaturationSupported</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_is_saturation_supported</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c970970&gt;<br/><br/>    def test_is_saturation_supported(self):<br/>        &quot;&quot;&quot;Test isSaturationSupported&quot;&quot;&quot;<br/>&gt;       switch_to_android()<br/><br/>cases/test_picture.py:328: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:156: in switch_to_android<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_is_saturation_supported: Test isSaturationSupported (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setBrightness</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_brightness[0]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9aa860&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_brightness(self, expected):<br/>        &quot;&quot;&quot;Test setBrightness&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:345: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setBrightness</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_brightness[50]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9aa5c0&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_brightness(self, expected):<br/>        &quot;&quot;&quot;Test setBrightness&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:345: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setBrightness</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_brightness[100]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9e75e0&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_brightness(self, expected):<br/>        &quot;&quot;&quot;Test setBrightness&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:345: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getBrightness</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_brightness[0]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9e5750&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_brightness(self, expected):<br/>        &quot;&quot;&quot;Test getBrightness&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:355: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getBrightness</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_brightness[50]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9e56f0&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_brightness(self, expected):<br/>        &quot;&quot;&quot;Test getBrightness&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:355: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getBrightness</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_brightness[100]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9e4190&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_brightness(self, expected):<br/>        &quot;&quot;&quot;Test getBrightness&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:355: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test isBrightnessSupported</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_is_brightness_supported</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9e4400&gt;<br/><br/>    def test_is_brightness_supported(self):<br/>        &quot;&quot;&quot;Test isBrightnessSupported&quot;&quot;&quot;<br/>&gt;       switch_to_android()<br/><br/>cases/test_picture.py:364: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:156: in switch_to_android<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_is_brightness_supported: Test isBrightnessSupported (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setSharpness</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_sharpness[0]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9e4fd0&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test setSharpness&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:381: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setSharpness</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_sharpness[50]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9e5ff0&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test setSharpness&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:381: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setSharpness</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_sharpness[100]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9e5420&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test setSharpness&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:381: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getSharpness</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_sharpness[0]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9e6f20&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test getSharpness&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:391: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getSharpness</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_sharpness[50]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9e5de0&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test getSharpness&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:391: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getSharpness</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_sharpness[100]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9e4be0&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test getSharpness&quot;&quot;&quot;<br/>&gt;       set_non_android_source_if_needed()<br/><br/>cases/test_picture.py:391: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:144: in set_non_android_source_if_needed<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test isSharpnessSupported</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_is_sharpness_supported</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9e7880&gt;<br/><br/>    def test_is_sharpness_supported(self):<br/>        &quot;&quot;&quot;Test isSharpnessSupported&quot;&quot;&quot;<br/>&gt;       switch_to_android()<br/><br/>cases/test_picture.py:400: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:156: in switch_to_android<br/>    current_source = get_current_source()<br/>cases/test_picture.py:56: in get_current_source<br/>    return ifp_delegate.dispatch(&quot;getCurrentSource&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getCurrentSource&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_is_sharpness_supported: Test isSharpnessSupported (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test isColorTempSupported</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_is_color_temp_supported</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9e4940&gt;<br/><br/>    def test_is_color_temp_supported(self):<br/>        &quot;&quot;&quot;Test isColorTempSupported&quot;&quot;&quot;<br/>&gt;       assert is_color_temp_supported()<br/><br/>cases/test_picture.py:416: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:132: in is_color_temp_supported<br/>    return ifp_delegate.dispatch(&quot;isColorTempSupported&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;isColorTempSupported&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_is_color_temp_supported: Test isColorTempSupported (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setColorTemp</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_color_temp[COLOR_WARM]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c970940&gt;<br/>expected = &#x27;COLOR_WARM&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_set_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test setColorTemp&quot;&quot;&quot;<br/>&gt;       set_color_temp(expected)<br/><br/>cases/test_picture.py:421: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:140: in set_color_temp<br/>    ifp_delegate.dispatch(&quot;setColorTemp&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setColorTemp&#x27;, data = &#x27;COLOR_WARM&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setColorTemp</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_color_temp[COLOR_NORMAL]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c971d20&gt;<br/>expected = &#x27;COLOR_NORMAL&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_set_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test setColorTemp&quot;&quot;&quot;<br/>&gt;       set_color_temp(expected)<br/><br/>cases/test_picture.py:421: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:140: in set_color_temp<br/>    ifp_delegate.dispatch(&quot;setColorTemp&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setColorTemp&#x27;, data = &#x27;COLOR_NORMAL&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setColorTemp</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_color_temp[COLOR_COLD]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9719c0&gt;<br/>expected = &#x27;COLOR_COLD&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_set_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test setColorTemp&quot;&quot;&quot;<br/>&gt;       set_color_temp(expected)<br/><br/>cases/test_picture.py:421: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:140: in set_color_temp<br/>    ifp_delegate.dispatch(&quot;setColorTemp&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setColorTemp&#x27;, data = &#x27;COLOR_COLD&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getColorTemp</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_color_temp[COLOR_WARM]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9e6c80&gt;<br/>expected = &#x27;COLOR_WARM&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_get_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test getColorTemp&quot;&quot;&quot;<br/>&gt;       set_color_temp(expected)<br/><br/>cases/test_picture.py:428: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:140: in set_color_temp<br/>    ifp_delegate.dispatch(&quot;setColorTemp&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setColorTemp&#x27;, data = &#x27;COLOR_WARM&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getColorTemp</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_color_temp[COLOR_NORMAL]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9e47c0&gt;<br/>expected = &#x27;COLOR_NORMAL&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_get_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test getColorTemp&quot;&quot;&quot;<br/>&gt;       set_color_temp(expected)<br/><br/>cases/test_picture.py:428: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:140: in set_color_temp<br/>    ifp_delegate.dispatch(&quot;setColorTemp&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setColorTemp&#x27;, data = &#x27;COLOR_NORMAL&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getColorTemp</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_color_temp[COLOR_COLD]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x70ad3c9e6470&gt;<br/>expected = &#x27;COLOR_COLD&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_get_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test getColorTemp&quot;&quot;&quot;<br/>&gt;       set_color_temp(expected)<br/><br/>cases/test_picture.py:428: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_picture.py:140: in set_color_temp<br/>    ifp_delegate.dispatch(&quot;setColorTemp&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setColorTemp&#x27;, data = &#x27;COLOR_COLD&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test SetAssetTag</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_set_asset_tag[Test1]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d7820&gt;<br/>expected = &#x27;Test1&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;Test1&quot;, 100])<br/>    def test_set_asset_tag(self, expected):<br/>        &quot;&quot;&quot;Test SetAssetTag&quot;&quot;&quot;<br/>&gt;       set_asset_tag(expected)<br/><br/>cases/test_system.py:99: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:10: in set_asset_tag<br/>    ifp_delegate.dispatch(&quot;setAssetTag&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setAssetTag&#x27;, data = &#x27;Test1&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_set_asset_tag: Test SetAssetTag (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test SetAssetTag</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_set_asset_tag[100]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d7790&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;Test1&quot;, 100])<br/>    def test_set_asset_tag(self, expected):<br/>        &quot;&quot;&quot;Test SetAssetTag&quot;&quot;&quot;<br/>&gt;       set_asset_tag(expected)<br/><br/>cases/test_system.py:99: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:10: in set_asset_tag<br/>    ifp_delegate.dispatch(&quot;setAssetTag&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setAssetTag&#x27;, data = 100, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_set_asset_tag: Test SetAssetTag (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test GetAssetTag</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_asset_tag[Test1]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d7520&gt;<br/>expected = &#x27;Test1&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;Test1&quot;, 100])<br/>    def test_get_asset_tag(self, expected):<br/>        &quot;&quot;&quot;Test GetAssetTag&quot;&quot;&quot;<br/>&gt;       set_asset_tag(expected)<br/><br/>cases/test_system.py:106: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:10: in set_asset_tag<br/>    ifp_delegate.dispatch(&quot;setAssetTag&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setAssetTag&#x27;, data = &#x27;Test1&#x27;, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_asset_tag: Test GetAssetTag (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test GetAssetTag</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_asset_tag[100]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d74c0&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;Test1&quot;, 100])<br/>    def test_get_asset_tag(self, expected):<br/>        &quot;&quot;&quot;Test GetAssetTag&quot;&quot;&quot;<br/>&gt;       set_asset_tag(expected)<br/><br/>cases/test_system.py:106: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:10: in set_asset_tag<br/>    ifp_delegate.dispatch(&quot;setAssetTag&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setAssetTag&#x27;, data = 100, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_asset_tag: Test GetAssetTag (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test get_build_number</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_build_number</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d7400&gt;<br/><br/>    def test_get_build_number(self):<br/>        &quot;&quot;&quot;Test get_build_number&quot;&quot;&quot;<br/>&gt;       actual = get_build_number()<br/><br/>cases/test_system.py:112: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:26: in get_build_number<br/>    return ifp_delegate.dispatch(&quot;getBuildNumber&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getBuildNumber&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_build_number: Test get_build_number (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test get_serial_number</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_serial_number</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d7280&gt;<br/><br/>    def test_get_serial_number(self):<br/>        &quot;&quot;&quot;Test get_serial_number&quot;&quot;&quot;<br/>&gt;       actual = get_serial_number()<br/><br/>cases/test_system.py:119: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:30: in get_serial_number<br/>    return ifp_delegate.dispatch(&quot;getSerialNumber&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getSerialNumber&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_serial_number: Test get_serial_number (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getRunningTime</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_running_time</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d7100&gt;<br/><br/>    def test_get_running_time(self):<br/>        &quot;&quot;&quot;Test getRunningTime&quot;&quot;&quot;<br/>&gt;       actual = get_running_time()<br/><br/>cases/test_system.py:127: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:34: in get_running_time<br/>    return ifp_delegate.dispatch(&quot;getRunningTime&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getRunningTime&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_running_time: Test getRunningTime (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test SystemPropertyString</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_system_property_string</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d6f80&gt;<br/><br/>    def test_get_system_property_string(self):<br/>        &quot;&quot;&quot;Test SystemPropertyString&quot;&quot;&quot;<br/>&gt;       actual = get_system_property_string(&quot;ro.build.version.release&quot;, &quot;unknown&quot;)<br/><br/>cases/test_system.py:134: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:41: in get_system_property_string<br/>    return ifp_delegate.dispatch(cmd, data, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getSystemPropertiesString&#x27;<br/>data = {&#x27;default&#x27;: &#x27;unknown&#x27;, &#x27;property&#x27;: &#x27;ro.build.version.release&#x27;}<br/>wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_system_property_string: Test SystemPropertyString (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test SystemPropertyInt</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_system_property_int</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d6ec0&gt;<br/><br/>    def test_get_system_property_int(self):<br/>        &quot;&quot;&quot;Test SystemPropertyInt&quot;&quot;&quot;<br/>&gt;       actual = get_system_property_int(&quot;ro.build.version.sdk&quot;, &quot;0&quot;)<br/><br/>cases/test_system.py:139: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:47: in get_system_property_int<br/>    return ifp_delegate.dispatch(cmd, data, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getSystemPropertiesInt&#x27;<br/>data = {&#x27;default&#x27;: &#x27;0&#x27;, &#x27;property&#x27;: &#x27;ro.build.version.sdk&#x27;}<br/>wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_system_property_int: Test SystemPropertyInt (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test SystemPropertyLong</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_system_property_long</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d4cd0&gt;<br/><br/>    def test_get_system_property_long(self):<br/>        &quot;&quot;&quot;Test SystemPropertyLong&quot;&quot;&quot;<br/>&gt;       actual = get_system_property_long(&quot;system.uptime&quot;, &quot;0&quot;)<br/><br/>cases/test_system.py:144: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:53: in get_system_property_long<br/>    return ifp_delegate.dispatch(cmd, data, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getSystemPropertiesLong&#x27;<br/>data = {&#x27;default&#x27;: &#x27;0&#x27;, &#x27;property&#x27;: &#x27;system.uptime&#x27;}, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_system_property_long: Test SystemPropertyLong (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test SystemPropertyBoolean</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_system_property_boolean</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d4a90&gt;<br/><br/>    def test_get_system_property_boolean(self):<br/>        &quot;&quot;&quot;Test SystemPropertyBoolean&quot;&quot;&quot;<br/>&gt;       is_system_property_boolean = get_system_property_boolean(&quot;debug.enable&quot;, &quot;false&quot;)<br/><br/>cases/test_system.py:150: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:59: in get_system_property_boolean<br/>    return ifp_delegate.dispatch(cmd, data, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getSystemPropertiesBoolean&#x27;<br/>data = {&#x27;default&#x27;: &#x27;false&#x27;, &#x27;property&#x27;: &#x27;debug.enable&#x27;}<br/>wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_system_property_boolean: Test SystemPropertyBoolean (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setSettingPasswordEnable</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_set_setting_password_enable[True]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d6ce0&gt;, expected = True<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_set_setting_password_enable(self, expected):<br/>        &quot;&quot;&quot;Test setSettingPasswordEnable&quot;&quot;&quot;<br/>&gt;       set_setting_password_enable(expected)<br/><br/>cases/test_system.py:158: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:67: in set_setting_password_enable<br/>    ifp_delegate.dispatch(&quot;setSettingPasswordEnable&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setSettingPasswordEnable&#x27;, data = True, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_set_setting_password_enable: Test setSettingPasswordEnable (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setSettingPasswordEnable</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_set_setting_password_enable[False]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d4790&gt;, expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_set_setting_password_enable(self, expected):<br/>        &quot;&quot;&quot;Test setSettingPasswordEnable&quot;&quot;&quot;<br/>&gt;       set_setting_password_enable(expected)<br/><br/>cases/test_system.py:158: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:67: in set_setting_password_enable<br/>    ifp_delegate.dispatch(&quot;setSettingPasswordEnable&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setSettingPasswordEnable&#x27;, data = False, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_set_setting_password_enable: Test setSettingPasswordEnable (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getSettingPasswordEnable</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_setting_password_enable[True]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d4400&gt;, expected = True<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_setting_password_enable(self, expected):<br/>        &quot;&quot;&quot;Test getSettingPasswordEnable&quot;&quot;&quot;<br/>&gt;       set_setting_password_enable(expected)<br/><br/>cases/test_system.py:165: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:67: in set_setting_password_enable<br/>    ifp_delegate.dispatch(&quot;setSettingPasswordEnable&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setSettingPasswordEnable&#x27;, data = True, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_setting_password_enable: Test getSettingPasswordEnable (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getSettingPasswordEnable</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_setting_password_enable[False]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d44f0&gt;, expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_setting_password_enable(self, expected):<br/>        &quot;&quot;&quot;Test getSettingPasswordEnable&quot;&quot;&quot;<br/>&gt;       set_setting_password_enable(expected)<br/><br/>cases/test_system.py:165: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:67: in set_setting_password_enable<br/>    ifp_delegate.dispatch(&quot;setSettingPasswordEnable&quot;, value)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;setSettingPasswordEnable&#x27;, data = False, wait_for_response = False<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_get_setting_password_enable: Test getSettingPasswordEnable (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setSettingPassword</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_setting_password[1111]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d46d0&gt;<br/>expected = &#x27;1111&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;1111&quot;, &quot;0000&quot;])<br/>    def test_setting_password(self, expected):<br/>        &quot;&quot;&quot;Test setSettingPassword&quot;&quot;&quot;<br/>&gt;       set_setting_password_enable_true()<br/><br/>cases/test_system.py:172: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:83: in set_setting_password_enable_true<br/>    is_current_setting_password_enable = get_setting_password_enable()<br/>cases/test_system.py:63: in get_setting_password_enable<br/>    return ifp_delegate.dispatch(&quot;getSettingPasswordEnable&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getSettingPasswordEnable&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_setting_password: Test setSettingPassword (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test setSettingPassword</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_setting_password[0000]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d40d0&gt;<br/>expected = &#x27;0000&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;1111&quot;, &quot;0000&quot;])<br/>    def test_setting_password(self, expected):<br/>        &quot;&quot;&quot;Test setSettingPassword&quot;&quot;&quot;<br/>&gt;       set_setting_password_enable_true()<br/><br/>cases/test_system.py:172: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:83: in set_setting_password_enable_true<br/>    is_current_setting_password_enable = get_setting_password_enable()<br/>cases/test_system.py:63: in get_setting_password_enable<br/>    return ifp_delegate.dispatch(&quot;getSettingPasswordEnable&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getSettingPasswordEnable&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_setting_password: Test setSettingPassword (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getSettingPassword</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_getsetting_password[1111]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3b7d4610&gt;<br/>expected = &#x27;1111&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;1111&quot;, &quot;0000&quot;])<br/>    def test_getsetting_password(self, expected):<br/>        &quot;&quot;&quot;Test getSettingPassword&quot;&quot;&quot;<br/>&gt;       set_setting_password_enable_true()<br/><br/>cases/test_system.py:180: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:83: in set_setting_password_enable_true<br/>    is_current_setting_password_enable = get_setting_password_enable()<br/>cases/test_system.py:63: in get_setting_password_enable<br/>    return ifp_delegate.dispatch(&quot;getSettingPasswordEnable&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getSettingPasswordEnable&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_getsetting_password: Test getSettingPassword (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test getSettingPassword</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_getsetting_password[0000]</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3c970190&gt;<br/>expected = &#x27;0000&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;1111&quot;, &quot;0000&quot;])<br/>    def test_getsetting_password(self, expected):<br/>        &quot;&quot;&quot;Test getSettingPassword&quot;&quot;&quot;<br/>&gt;       set_setting_password_enable_true()<br/><br/>cases/test_system.py:180: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:83: in set_setting_password_enable_true<br/>    is_current_setting_password_enable = get_setting_password_enable()<br/>cases/test_system.py:63: in get_setting_password_enable<br/>    return ifp_delegate.dispatch(&quot;getSettingPasswordEnable&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getSettingPasswordEnable&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_getsetting_password: Test getSettingPassword (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-title">Test cleanSettingPassword</td>
+          <td class="col-name">cases/test_system.py::TestSystem::test_clean_setting_password</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x70ad3c9e6140&gt;<br/><br/>    def test_clean_setting_password(self):<br/>        &quot;&quot;&quot;Test cleanSettingPassword&quot;&quot;&quot;<br/>&gt;       set_setting_password_enable_true()<br/><br/>cases/test_system.py:187: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>cases/test_system.py:83: in set_setting_password_enable_true<br/>    is_current_setting_password_enable = get_setting_password_enable()<br/>cases/test_system.py:63: in get_setting_password_enable<br/>    return ifp_delegate.dispatch(&quot;getSettingPasswordEnable&quot;, &quot;&quot;, wait_for_response=True)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>self = &lt;ifp_delegate.IFPDelegate object at 0x70ad3ca00e50&gt;<br/>command = &#x27;getSettingPasswordEnable&#x27;, data = &#x27;&#x27;, wait_for_response = True<br/><br/>    def dispatch(self, command, data, wait_for_response=False):<br/>        if not self.socket:<br/>            raise Exception(&quot;did not connect to the device yet.&quot;)<br/>        cmd_str = json.dumps({&quot;cmd&quot;: command, &quot;data&quot;: data}) + &quot;\n&quot;<br/>&gt;       self.socket.sendall(cmd_str.encode(&quot;utf-8&quot;))<br/><span class="error">E       OSError: [Errno 9] Bad file descriptor</span><br/><br/>ifp_delegate.py:78: OSError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:16:00 [INFO] TestCase test_clean_setting_password: Test cleanSettingPassword (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="skipped results-table-row">
+        <tr>
+          <td class="col-result">Skipped</td>
+          <td class="col-title">Test getScreenshot</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_screenshot::setup</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">(&#x27;/home/vi610712/dev/myagent/_work/4/s/cases/test_picture.py&#x27;, 169, &#x27;Skipped: api 尚未實作&#x27;)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-title">Test setVolume</td>
+          <td class="col-name">cases/test_audio.py::TestAudio::test_set_volume[0]</td>
+          <td class="col-duration">6.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:14:44 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-title">Test setVolume</td>
+          <td class="col-name">cases/test_audio.py::TestAudio::test_set_volume[50]</td>
+          <td class="col-duration">6.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:14:50 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-title">Test setVolume</td>
+          <td class="col-name">cases/test_audio.py::TestAudio::test_set_volume[100]</td>
+          <td class="col-duration">6.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:14:56 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-title">Test getVolume</td>
+          <td class="col-name">cases/test_audio.py::TestAudio::test_get_volume[0]</td>
+          <td class="col-duration">6.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:02 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-title">Test getVolume</td>
+          <td class="col-name">cases/test_audio.py::TestAudio::test_get_volume[50]</td>
+          <td class="col-duration">6.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:08 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-title">Test getVolume</td>
+          <td class="col-name">cases/test_audio.py::TestAudio::test_get_volume[100]</td>
+          <td class="col-duration">6.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:14 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-title">Test setMute</td>
+          <td class="col-name">cases/test_audio.py::TestAudio::test_set_mute[True]</td>
+          <td class="col-duration">6.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:20 [INFO] TestCase test_set_mute: Test setMute (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-title">Test setMute</td>
+          <td class="col-name">cases/test_audio.py::TestAudio::test_set_mute[False]</td>
+          <td class="col-duration">6.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:26 [INFO] TestCase test_set_mute: Test setMute (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-title">Test getMute</td>
+          <td class="col-name">cases/test_audio.py::TestAudio::test_get_mute[True]</td>
+          <td class="col-duration">6.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:32 [INFO] TestCase test_get_mute: Test getMute (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-title">Test getMute</td>
+          <td class="col-name">cases/test_audio.py::TestAudio::test_get_mute[False]</td>
+          <td class="col-duration">6.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:38 [INFO] TestCase test_get_mute: Test getMute (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-title">Test switchToSettings</td>
+          <td class="col-name">cases/test_control.py::TestControl::test_switch_to_settings[Left]</td>
+          <td class="col-duration">3.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:44 [INFO] TestCase test_switch_to_settings: Test switchToSettings (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-title">Test switchToDataTimeSettings</td>
+          <td class="col-name">cases/test_control.py::TestControl::test_switch_to_data_time_settings[Left]</td>
+          <td class="col-duration">3.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:47 [INFO] TestCase test_switch_to_data_time_settings: Test switchToDataTimeSettings (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-title">Test setEyeCareEnabled</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_eye_care_enabled[True]</td>
+          <td class="col-duration">6.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-29 18:15:50 [INFO] TestCase test_set_eye_care_enabled: Test setEyeCareEnabled (conftest.py:59)<br/></div></td></tr></tbody></table></body></html>
