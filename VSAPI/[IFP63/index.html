@@ -405,10 +405,10 @@ function filter_table(elem) {
 }
 </script>
     <h1>Automation_Test_Report.html</h1>
-    <p>Report generated on 30-Oct-2025 at 18:02:46 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v2.0.1</p>
+    <p>Report generated on 31-Oct-2025 at 10:40:16 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v2.0.1</p>
     <h2>Summary</h2>
-    <p>101 tests ran in 1017.87 seconds. </p>
-    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">98 passed</span>, <input checked="true" class="filter" data-test-result="skipped" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">1 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">3 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>, <input checked="true" class="filter" data-test-result="rerun" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="rerun">0 rerun</span>
+    <p>101 tests ran in 1017.83 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">100 passed</span>, <input checked="true" class="filter" data-test-result="skipped" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">1 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">1 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>, <input checked="true" class="filter" data-test-result="rerun" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="rerun">0 rerun</span>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
@@ -427,25 +427,7 @@ function filter_table(elem) {
           <td class="col-duration">3.00</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7c2475f736a0&gt;<br/><br/>    def test_is_color_temp_supported(self):<br/>        &quot;&quot;&quot;Test isColorTempSupported&quot;&quot;&quot;<br/>&gt;       assert is_color_temp_supported()<br/><span class="error">E       assert False</span><br/><span class="error">E        +  where False = is_color_temp_supported()</span><br/><br/>cases/test_picture.py:416: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:00:07 [INFO] TestCase test_is_color_temp_supported: Test isColorTempSupported (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test setColorTemp</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_set_color_temp[COLOR_NORMAL]</td>
-          <td class="col-duration">6.01</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7c2475ee23b0&gt;<br/>expected = &#x27;COLOR_NORMAL&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_set_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test setColorTemp&quot;&quot;&quot;<br/>        set_color_temp(expected)<br/>        actual = get_color_temp()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert &#x27;COLOR_USER&#x27; == &#x27;COLOR_NORMAL&#x27;</span><br/><span class="error">E         </span><br/><span class="error">E         - COLOR_NORMAL</span><br/><span class="error">E         + COLOR_USER</span><br/><br/>cases/test_picture.py:423: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:00:16 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test getColorTemp</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_get_color_temp[COLOR_NORMAL]</td>
-          <td class="col-duration">6.01</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7c2475f700d0&gt;<br/>expected = &#x27;COLOR_NORMAL&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_get_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test getColorTemp&quot;&quot;&quot;<br/>        set_color_temp(expected)<br/>        actual = get_color_temp()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert &#x27;COLOR_USER&#x27; == &#x27;COLOR_NORMAL&#x27;</span><br/><span class="error">E         </span><br/><span class="error">E         - COLOR_NORMAL</span><br/><span class="error">E         + COLOR_USER</span><br/><br/>cases/test_picture.py:430: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:00:34 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x73998cd64760&gt;<br/><br/>    def test_is_color_temp_supported(self):<br/>        &quot;&quot;&quot;Test isColorTempSupported&quot;&quot;&quot;<br/>&gt;       assert is_color_temp_supported()<br/><span class="error">E       assert False</span><br/><span class="error">E        +  where False = is_color_temp_supported()</span><br/><br/>cases/test_picture.py:416: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:37:37 [INFO] TestCase test_is_color_temp_supported: Test isColorTempSupported (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="skipped results-table-row">
         <tr>
           <td class="col-result">Skipped</td>
@@ -463,7 +445,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:45:53 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:23:23 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -472,7 +454,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:45:59 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:23:29 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -481,7 +463,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:46:05 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:23:35 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -490,16 +472,16 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:46:11 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:23:41 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-title">Test getVolume</td>
           <td class="col-name">cases/test_audio.py::TestAudio::test_get_volume[50]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">6.00</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:46:17 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:23:47 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -508,7 +490,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:46:23 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:23:53 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -517,7 +499,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:46:29 [INFO] TestCase test_set_mute: Test setMute (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:23:59 [INFO] TestCase test_set_mute: Test setMute (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -526,7 +508,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:46:36 [INFO] TestCase test_set_mute: Test setMute (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:24:05 [INFO] TestCase test_set_mute: Test setMute (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -535,7 +517,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:46:42 [INFO] TestCase test_get_mute: Test getMute (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:24:11 [INFO] TestCase test_get_mute: Test getMute (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -544,7 +526,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:46:48 [INFO] TestCase test_get_mute: Test getMute (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:24:17 [INFO] TestCase test_get_mute: Test getMute (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -553,7 +535,7 @@ function filter_table(elem) {
           <td class="col-duration">3.00</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:46:54 [INFO] TestCase test_switch_to_settings: Test switchToSettings (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:24:23 [INFO] TestCase test_switch_to_settings: Test switchToSettings (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -562,7 +544,7 @@ function filter_table(elem) {
           <td class="col-duration">3.00</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:46:57 [INFO] TestCase test_switch_to_data_time_settings: Test switchToDataTimeSettings (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:24:26 [INFO] TestCase test_switch_to_data_time_settings: Test switchToDataTimeSettings (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -571,7 +553,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:47:00 [INFO] TestCase test_set_eye_care_enabled: Test setEyeCareEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:24:29 [INFO] TestCase test_set_eye_care_enabled: Test setEyeCareEnabled (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -580,7 +562,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:47:06 [INFO] TestCase test_set_eye_care_enabled: Test setEyeCareEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:24:35 [INFO] TestCase test_set_eye_care_enabled: Test setEyeCareEnabled (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -589,7 +571,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:47:12 [INFO] TestCase test_get_eye_care_enabled: Test getEyeCareEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:24:41 [INFO] TestCase test_get_eye_care_enabled: Test getEyeCareEnabled (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -598,7 +580,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:47:18 [INFO] TestCase test_get_eye_care_enabled: Test getEyeCareEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:24:47 [INFO] TestCase test_get_eye_care_enabled: Test getEyeCareEnabled (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -607,7 +589,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:47:24 [INFO] TestCase test_set_backlight_auto_enabled: Test setBacklightAutoEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:24:54 [INFO] TestCase test_set_backlight_auto_enabled: Test setBacklightAutoEnabled (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -616,7 +598,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:47:30 [INFO] TestCase test_set_backlight_auto_enabled: Test setBacklightAutoEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:25:00 [INFO] TestCase test_set_backlight_auto_enabled: Test setBacklightAutoEnabled (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -625,7 +607,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:47:36 [INFO] TestCase test_get_backlight_auto_enabled: Test getBacklightAutoEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:25:06 [INFO] TestCase test_get_backlight_auto_enabled: Test getBacklightAutoEnabled (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -634,7 +616,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:47:42 [INFO] TestCase test_get_backlight_auto_enabled: Test getBacklightAutoEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:25:12 [INFO] TestCase test_get_backlight_auto_enabled: Test getBacklightAutoEnabled (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -643,7 +625,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:47:48 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:25:18 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -652,7 +634,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:47:54 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:25:24 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -661,7 +643,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:48:00 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:25:30 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -670,7 +652,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:48:06 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:25:36 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -679,7 +661,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:48:12 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:25:42 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -688,7 +670,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:48:18 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:25:48 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -697,7 +679,7 @@ function filter_table(elem) {
           <td class="col-duration">3.00</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:48:24 [INFO] TestCase test_get_backlight_support: Test getBacklightSupport (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:25:54 [INFO] TestCase test_get_backlight_support: Test getBacklightSupport (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -706,7 +688,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:48:27 [INFO] TestCase test_get_current_source: Test CurrentSource (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:25:57 [INFO] TestCase test_get_current_source: Test CurrentSource (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -715,16 +697,16 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:48:33 [INFO] TestCase test_get_current_source: Test CurrentSource (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:26:03 [INFO] TestCase test_get_current_source: Test CurrentSource (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-title">Test CurrentSource</td>
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_current_source[ANDROID]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">6.00</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:48:39 [INFO] TestCase test_get_current_source: Test CurrentSource (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:26:09 [INFO] TestCase test_get_current_source: Test CurrentSource (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -733,7 +715,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:48:45 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:26:15 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -742,7 +724,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:48:51 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:26:21 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -751,7 +733,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:48:57 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:26:27 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -760,7 +742,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:49:03 [INFO] TestCase test_set_source_alias_enable: Test setSourceAliasEnable (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:26:33 [INFO] TestCase test_set_source_alias_enable: Test setSourceAliasEnable (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -769,7 +751,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:49:09 [INFO] TestCase test_set_source_alias_enable: Test setSourceAliasEnable (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:26:39 [INFO] TestCase test_set_source_alias_enable: Test setSourceAliasEnable (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -778,7 +760,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:49:15 [INFO] TestCase test_get_source_alias_enable: Test getSourceAliasEnable (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:26:45 [INFO] TestCase test_get_source_alias_enable: Test getSourceAliasEnable (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -787,7 +769,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:49:21 [INFO] TestCase test_get_source_alias_enable: Test getSourceAliasEnable (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:26:51 [INFO] TestCase test_get_source_alias_enable: Test getSourceAliasEnable (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -796,7 +778,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:49:27 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:26:57 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -805,7 +787,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:49:33 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:27:03 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -814,7 +796,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:49:39 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:27:09 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -823,7 +805,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:49:45 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:27:15 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -832,7 +814,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:49:51 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:27:21 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -841,7 +823,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:49:57 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:27:27 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -850,7 +832,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:50:03 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:27:33 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -859,7 +841,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:50:09 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:27:39 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -868,7 +850,7 @@ function filter_table(elem) {
           <td class="col-duration">3.00</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:50:15 [INFO] TestCase test_get_all_picture_mode_list: Test getAllPictureModeList (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:27:45 [INFO] TestCase test_get_all_picture_mode_list: Test getAllPictureModeList (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -877,7 +859,7 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:50:18 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:27:48 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -886,7 +868,7 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:50:39 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:28:09 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -895,7 +877,7 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:51:00 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:28:30 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -904,7 +886,7 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:51:21 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:28:51 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -913,7 +895,7 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:51:42 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:29:12 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -922,16 +904,16 @@ function filter_table(elem) {
           <td class="col-duration">21.03</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:52:03 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:29:33 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-title">Test isContrastSupported</td>
           <td class="col-name">cases/test_picture.py::TestPicture::test_is_contrast_supported</td>
-          <td class="col-duration">21.03</td></tr>
+          <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:52:24 [INFO] TestCase test_is_contrast_supported: Test isContrastSupported (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:29:54 [INFO] TestCase test_is_contrast_supported: Test isContrastSupported (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -940,7 +922,7 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:52:45 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:30:15 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -949,7 +931,7 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:53:06 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:30:36 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -958,7 +940,7 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:53:27 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:30:57 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -967,7 +949,7 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:53:48 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:31:18 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -976,7 +958,7 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:54:09 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:31:39 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -985,7 +967,7 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:54:30 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:32:00 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -994,7 +976,7 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:54:51 [INFO] TestCase test_is_saturation_supported: Test isSaturationSupported (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:32:21 [INFO] TestCase test_is_saturation_supported: Test isSaturationSupported (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1003,16 +985,16 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:55:12 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:32:42 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-title">Test setBrightness</td>
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_brightness[50]</td>
-          <td class="col-duration">21.03</td></tr>
+          <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:55:33 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:33:03 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1021,7 +1003,7 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:55:54 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:33:24 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1030,7 +1012,7 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:56:15 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:33:45 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1039,7 +1021,7 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:56:36 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:34:06 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1048,16 +1030,16 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:56:57 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:34:27 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-title">Test isBrightnessSupported</td>
           <td class="col-name">cases/test_picture.py::TestPicture::test_is_brightness_supported</td>
-          <td class="col-duration">21.03</td></tr>
+          <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:57:19 [INFO] TestCase test_is_brightness_supported: Test isBrightnessSupported (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:34:48 [INFO] TestCase test_is_brightness_supported: Test isBrightnessSupported (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1066,7 +1048,7 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:57:40 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:35:09 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1075,25 +1057,25 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:58:01 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:35:30 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-title">Test setSharpness</td>
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_sharpness[100]</td>
-          <td class="col-duration">21.03</td></tr>
+          <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:58:22 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:35:51 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-title">Test getSharpness</td>
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_sharpness[0]</td>
-          <td class="col-duration">21.03</td></tr>
+          <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:58:43 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:36:13 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1102,7 +1084,7 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:59:04 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:36:34 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1111,16 +1093,16 @@ function filter_table(elem) {
           <td class="col-duration">21.02</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:59:25 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:36:55 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
           <td class="col-title">Test isSharpnessSupported</td>
           <td class="col-name">cases/test_picture.py::TestPicture::test_is_sharpness_supported</td>
-          <td class="col-duration">21.02</td></tr>
+          <td class="col-duration">21.03</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 17:59:46 [INFO] TestCase test_is_sharpness_supported: Test isSharpnessSupported (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:37:16 [INFO] TestCase test_is_sharpness_supported: Test isSharpnessSupported (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1129,7 +1111,16 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:00:10 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:37:40 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-title">Test setColorTemp</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_color_temp[COLOR_NORMAL]</td>
+          <td class="col-duration">6.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:37:46 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1138,7 +1129,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:00:22 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:37:52 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1147,7 +1138,16 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:00:28 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:37:58 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-title">Test getColorTemp</td>
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_color_temp[COLOR_NORMAL]</td>
+          <td class="col-duration">6.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:38:04 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1156,7 +1156,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:00:40 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:38:10 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1165,7 +1165,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:00:46 [INFO] TestCase test_set_asset_tag: Test SetAssetTag (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:38:16 [INFO] TestCase test_set_asset_tag: Test SetAssetTag (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1174,7 +1174,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:00:52 [INFO] TestCase test_set_asset_tag: Test SetAssetTag (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:38:22 [INFO] TestCase test_set_asset_tag: Test SetAssetTag (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1183,7 +1183,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:00:58 [INFO] TestCase test_get_asset_tag: Test GetAssetTag (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:38:28 [INFO] TestCase test_get_asset_tag: Test GetAssetTag (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1192,7 +1192,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:01:04 [INFO] TestCase test_get_asset_tag: Test GetAssetTag (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:38:34 [INFO] TestCase test_get_asset_tag: Test GetAssetTag (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1201,7 +1201,7 @@ function filter_table(elem) {
           <td class="col-duration">3.00</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:01:10 [INFO] TestCase test_get_build_number: Test get_build_number (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:38:40 [INFO] TestCase test_get_build_number: Test get_build_number (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1210,7 +1210,7 @@ function filter_table(elem) {
           <td class="col-duration">3.00</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:01:13 [INFO] TestCase test_get_serial_number: Test get_serial_number (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:38:43 [INFO] TestCase test_get_serial_number: Test get_serial_number (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1219,7 +1219,7 @@ function filter_table(elem) {
           <td class="col-duration">3.00</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:01:16 [INFO] TestCase test_get_running_time: Test getRunningTime (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:38:46 [INFO] TestCase test_get_running_time: Test getRunningTime (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1228,7 +1228,7 @@ function filter_table(elem) {
           <td class="col-duration">3.00</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:01:19 [INFO] TestCase test_get_system_property_string: Test SystemPropertyString (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:38:49 [INFO] TestCase test_get_system_property_string: Test SystemPropertyString (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1237,7 +1237,7 @@ function filter_table(elem) {
           <td class="col-duration">3.00</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:01:22 [INFO] TestCase test_get_system_property_int: Test SystemPropertyInt (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:38:52 [INFO] TestCase test_get_system_property_int: Test SystemPropertyInt (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1246,7 +1246,7 @@ function filter_table(elem) {
           <td class="col-duration">3.00</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:01:25 [INFO] TestCase test_get_system_property_long: Test SystemPropertyLong (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:38:55 [INFO] TestCase test_get_system_property_long: Test SystemPropertyLong (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1255,7 +1255,7 @@ function filter_table(elem) {
           <td class="col-duration">3.00</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:01:28 [INFO] TestCase test_get_system_property_boolean: Test SystemPropertyBoolean (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:38:58 [INFO] TestCase test_get_system_property_boolean: Test SystemPropertyBoolean (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1264,7 +1264,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:01:31 [INFO] TestCase test_set_setting_password_enable: Test setSettingPasswordEnable (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:39:01 [INFO] TestCase test_set_setting_password_enable: Test setSettingPasswordEnable (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1273,7 +1273,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:01:37 [INFO] TestCase test_set_setting_password_enable: Test setSettingPasswordEnable (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:39:07 [INFO] TestCase test_set_setting_password_enable: Test setSettingPasswordEnable (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1282,7 +1282,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:01:43 [INFO] TestCase test_get_setting_password_enable: Test getSettingPasswordEnable (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:39:13 [INFO] TestCase test_get_setting_password_enable: Test getSettingPasswordEnable (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1291,7 +1291,7 @@ function filter_table(elem) {
           <td class="col-duration">6.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:01:49 [INFO] TestCase test_get_setting_password_enable: Test getSettingPasswordEnable (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:39:19 [INFO] TestCase test_get_setting_password_enable: Test getSettingPasswordEnable (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1300,7 +1300,7 @@ function filter_table(elem) {
           <td class="col-duration">12.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:01:55 [INFO] TestCase test_setting_password: Test setSettingPassword (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:39:25 [INFO] TestCase test_setting_password: Test setSettingPassword (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1309,7 +1309,7 @@ function filter_table(elem) {
           <td class="col-duration">9.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:02:07 [INFO] TestCase test_setting_password: Test setSettingPassword (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:39:37 [INFO] TestCase test_setting_password: Test setSettingPassword (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1318,7 +1318,7 @@ function filter_table(elem) {
           <td class="col-duration">9.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:02:16 [INFO] TestCase test_getsetting_password: Test getSettingPassword (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:39:46 [INFO] TestCase test_getsetting_password: Test getSettingPassword (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1327,7 +1327,7 @@ function filter_table(elem) {
           <td class="col-duration">9.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:02:25 [INFO] TestCase test_getsetting_password: Test getSettingPassword (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:39:55 [INFO] TestCase test_getsetting_password: Test getSettingPassword (conftest.py:59)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
           <td class="col-result">Passed</td>
@@ -1336,4 +1336,4 @@ function filter_table(elem) {
           <td class="col-duration">12.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-30 18:02:34 [INFO] TestCase test_clean_setting_password: Test cleanSettingPassword (conftest.py:59)<br/></div></td></tr></tbody></table></body></html>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-10-31 10:40:04 [INFO] TestCase test_clean_setting_password: Test cleanSettingPassword (conftest.py:59)<br/></div></td></tr></tbody></table></body></html>
