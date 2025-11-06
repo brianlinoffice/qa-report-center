@@ -405,647 +405,832 @@ function filter_table(elem) {
 }
 </script>
     <h1>Automation_Test_Report.html</h1>
-    <p>Report generated on 04-Nov-2025 at 13:45:13 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v2.0.1</p>
+    <p>Report generated on 06-Nov-2025 at 12:21:07 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v2.0.1</p>
     <h2>Summary</h2>
-    <p>69 tests ran in 759.60 seconds. </p>
-    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">38 passed</span>, <input checked="true" class="filter" data-test-result="skipped" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">1 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">31 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>, <input checked="true" class="filter" data-test-result="rerun" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="rerun">0 rerun</span>
+    <p>101 tests ran in 1689.46 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">100 passed</span>, <input checked="true" class="filter" data-test-result="skipped" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">1 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">1 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>, <input checked="true" class="filter" data-test-result="rerun" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="rerun">0 rerun</span>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
         <tr>
-          <th class="sortable result initial-sort" col="result">Result</th>
-          <th class="sortable" col="col-title">Description</th>
+          <th class="sortable result initial-sort" col="result">Result</th>&lt;th class=&quot;sortable col-title&quot; data-column-type=&quot;text&quot;&gt;Description&lt;/th&gt;
           <th class="sortable" col="name">Test</th>
           <th class="sortable numeric" col="duration">Duration</th></tr>
         <tr hidden="true" id="not-found-message">
           <th colspan="4">No results found. Try to check the filters</th></tr></thead>
       <tbody class="failed results-table-row">
         <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test getContrast</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_get_contrast[50]</td>
-          <td class="col-duration">18.02</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062dad720&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_contrast(self, expected):<br/>        &quot;&quot;&quot;Test getContrast&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_contrast(expected)<br/>        actual = get_contrast()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert 0 == 50</span><br/><br/>cases/test_picture.py:287: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:37:21 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test getContrast</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_get_contrast[100]</td>
-          <td class="col-duration">18.02</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062dad930&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_contrast(self, expected):<br/>        &quot;&quot;&quot;Test getContrast&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_contrast(expected)<br/>        actual = get_contrast()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert 0 == 100</span><br/><br/>cases/test_picture.py:287: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:37:39 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test isContrastSupported</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_is_contrast_supported</td>
-          <td class="col-duration">18.02</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062dac700&gt;<br/><br/>    def test_is_contrast_supported(self):<br/>        &quot;&quot;&quot;Test isContrastSupported&quot;&quot;&quot;<br/>        switch_to_android()<br/>        current = get_current_source()<br/>        contrast_supported = is_contrast_supported()<br/>        assert current == &quot;ANDROID&quot;<br/>        assert not contrast_supported<br/>    <br/>        switch_source(&quot;HDMI1&quot;)<br/>        current = get_current_source()<br/>        contrast_supported = is_contrast_supported()<br/>&gt;       assert current == &quot;HDMI1&quot;<br/><span class="error">E       AssertionError: assert &#x27;ANDROID&#x27; == &#x27;HDMI1&#x27;</span><br/><span class="error">E         </span><br/><span class="error">E         - HDMI1</span><br/><span class="error">E         + ANDROID</span><br/><br/>cases/test_picture.py:301: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:37:57 [INFO] TestCase test_is_contrast_supported: Test isContrastSupported (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test setSaturation</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_set_saturation[0]</td>
-          <td class="col-duration">18.02</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062daf3a0&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_saturation(self, expected):<br/>        &quot;&quot;&quot;Test setSaturation&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_saturation(expected)<br/>        actual = get_saturation()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 0</span><br/><br/>cases/test_picture.py:313: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:38:15 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test setSaturation</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_set_saturation[50]</td>
-          <td class="col-duration">18.03</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062daf2b0&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_saturation(self, expected):<br/>        &quot;&quot;&quot;Test setSaturation&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_saturation(expected)<br/>        actual = get_saturation()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 50</span><br/><br/>cases/test_picture.py:313: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:38:33 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test setSaturation</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_set_saturation[100]</td>
-          <td class="col-duration">18.02</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062daea40&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_saturation(self, expected):<br/>        &quot;&quot;&quot;Test setSaturation&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_saturation(expected)<br/>        actual = get_saturation()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_picture.py:313: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:38:51 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test getSaturation</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_get_saturation[0]</td>
-          <td class="col-duration">18.02</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062dac940&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_saturation(self, expected):<br/>        &quot;&quot;&quot;Test getSaturation&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_saturation(expected)<br/>        actual = get_saturation()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 0</span><br/><br/>cases/test_picture.py:323: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:39:09 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test getSaturation</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_get_saturation[50]</td>
-          <td class="col-duration">18.02</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062dac7f0&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_saturation(self, expected):<br/>        &quot;&quot;&quot;Test getSaturation&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_saturation(expected)<br/>        actual = get_saturation()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 50</span><br/><br/>cases/test_picture.py:323: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:39:27 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test getSaturation</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_get_saturation[100]</td>
-          <td class="col-duration">18.03</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062dac9d0&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_saturation(self, expected):<br/>        &quot;&quot;&quot;Test getSaturation&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_saturation(expected)<br/>        actual = get_saturation()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_picture.py:323: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:39:45 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test isSaturationSupported</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_is_saturation_supported</td>
-          <td class="col-duration">18.03</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c02560&gt;<br/><br/>    def test_is_saturation_supported(self):<br/>        &quot;&quot;&quot;Test isSaturationSupported&quot;&quot;&quot;<br/>        switch_to_android()<br/>        current = get_current_source()<br/>        saturation_supported = is_saturation_supported()<br/>        assert current == &quot;ANDROID&quot;<br/>        assert not saturation_supported<br/>    <br/>        switch_source(&quot;HDMI1&quot;)<br/>        current = get_current_source()<br/>        saturation_supported = is_saturation_supported()<br/>&gt;       assert current == &quot;HDMI1&quot;<br/><span class="error">E       AssertionError: assert &#x27;ANDROID&#x27; == &#x27;HDMI1&#x27;</span><br/><span class="error">E         </span><br/><span class="error">E         - HDMI1</span><br/><span class="error">E         + ANDROID</span><br/><br/>cases/test_picture.py:337: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:40:03 [INFO] TestCase test_is_saturation_supported: Test isSaturationSupported (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test setBrightness</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_set_brightness[0]</td>
-          <td class="col-duration">18.02</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c03490&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_brightness(self, expected):<br/>        &quot;&quot;&quot;Test setBrightness&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_brightness(expected)<br/>        actual = get_brightness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 0</span><br/><br/>cases/test_picture.py:349: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:40:21 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test setBrightness</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_set_brightness[50]</td>
-          <td class="col-duration">18.03</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c03940&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_brightness(self, expected):<br/>        &quot;&quot;&quot;Test setBrightness&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_brightness(expected)<br/>        actual = get_brightness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 50</span><br/><br/>cases/test_picture.py:349: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:40:39 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test setBrightness</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_set_brightness[100]</td>
-          <td class="col-duration">18.03</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c03190&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_brightness(self, expected):<br/>        &quot;&quot;&quot;Test setBrightness&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_brightness(expected)<br/>        actual = get_brightness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_picture.py:349: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:40:57 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test getBrightness</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_get_brightness[0]</td>
-          <td class="col-duration">18.02</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c03820&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_brightness(self, expected):<br/>        &quot;&quot;&quot;Test getBrightness&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_brightness(expected)<br/>        actual = get_brightness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 0</span><br/><br/>cases/test_picture.py:359: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:41:15 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test getBrightness</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_get_brightness[50]</td>
-          <td class="col-duration">18.02</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c011b0&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_brightness(self, expected):<br/>        &quot;&quot;&quot;Test getBrightness&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_brightness(expected)<br/>        actual = get_brightness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 50</span><br/><br/>cases/test_picture.py:359: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:41:34 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test getBrightness</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_get_brightness[100]</td>
-          <td class="col-duration">18.02</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c00160&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_brightness(self, expected):<br/>        &quot;&quot;&quot;Test getBrightness&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_brightness(expected)<br/>        actual = get_brightness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_picture.py:359: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:41:52 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test isBrightnessSupported</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_is_brightness_supported</td>
-          <td class="col-duration">18.03</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c036d0&gt;<br/><br/>    def test_is_brightness_supported(self):<br/>        &quot;&quot;&quot;Test isBrightnessSupported&quot;&quot;&quot;<br/>        switch_to_android()<br/>        current = get_current_source()<br/>        brightness_supported = is_brightness_supported()<br/>        assert current == &quot;ANDROID&quot;<br/>        assert not brightness_supported<br/>    <br/>        switch_source(&quot;HDMI1&quot;)<br/>        current = get_current_source()<br/>        brightness_supported = is_brightness_supported()<br/>&gt;       assert current == &quot;HDMI1&quot;<br/><span class="error">E       AssertionError: assert &#x27;ANDROID&#x27; == &#x27;HDMI1&#x27;</span><br/><span class="error">E         </span><br/><span class="error">E         - HDMI1</span><br/><span class="error">E         + ANDROID</span><br/><br/>cases/test_picture.py:373: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:42:10 [INFO] TestCase test_is_brightness_supported: Test isBrightnessSupported (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test setSharpness</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_set_sharpness[0]</td>
-          <td class="col-duration">18.03</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c001f0&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test setSharpness&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_sharpness(expected)<br/>        actual = get_sharpness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 0</span><br/><br/>cases/test_picture.py:385: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:42:28 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test setSharpness</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_set_sharpness[50]</td>
-          <td class="col-duration">18.02</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c00340&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test setSharpness&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_sharpness(expected)<br/>        actual = get_sharpness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 50</span><br/><br/>cases/test_picture.py:385: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:42:46 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test setSharpness</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_set_sharpness[100]</td>
-          <td class="col-duration">18.02</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c00d30&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test setSharpness&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_sharpness(expected)<br/>        actual = get_sharpness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_picture.py:385: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:43:04 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test getSharpness</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_get_sharpness[0]</td>
-          <td class="col-duration">18.02</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c03010&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test getSharpness&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_sharpness(expected)<br/>        actual = get_sharpness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 0</span><br/><br/>cases/test_picture.py:395: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:43:22 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test getSharpness</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_get_sharpness[50]</td>
-          <td class="col-duration">18.02</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c03970&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test getSharpness&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_sharpness(expected)<br/>        actual = get_sharpness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 50</span><br/><br/>cases/test_picture.py:395: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:43:40 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test getSharpness</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_get_sharpness[100]</td>
-          <td class="col-duration">18.03</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c03280&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test getSharpness&quot;&quot;&quot;<br/>        set_non_android_source_if_needed()<br/>        set_custom_picture_mode_if_needed()<br/>        set_sharpness(expected)<br/>        actual = get_sharpness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_picture.py:395: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:43:58 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test isSharpnessSupported</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_is_sharpness_supported</td>
-          <td class="col-duration">18.03</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c02470&gt;<br/><br/>    def test_is_sharpness_supported(self):<br/>        &quot;&quot;&quot;Test isSharpnessSupported&quot;&quot;&quot;<br/>        switch_to_android()<br/>        current = get_current_source()<br/>        sharpness_supported = is_sharpness_supported()<br/>        assert current == &quot;ANDROID&quot;<br/>        assert not sharpness_supported<br/>    <br/>        switch_source(&quot;HDMI1&quot;)<br/>        current = get_current_source()<br/>        sharpness_supported = is_sharpness_supported()<br/>&gt;       assert current == &quot;HDMI1&quot;<br/><span class="error">E       AssertionError: assert &#x27;ANDROID&#x27; == &#x27;HDMI1&#x27;</span><br/><span class="error">E         </span><br/><span class="error">E         - HDMI1</span><br/><span class="error">E         + ANDROID</span><br/><br/>cases/test_picture.py:409: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:44:16 [INFO] TestCase test_is_sharpness_supported: Test isSharpnessSupported (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test isColorTempSupported</td>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test isColorTempSupported&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_is_color_temp_supported</td>
-          <td class="col-duration">3.01</td></tr>
+          <td class="col-duration">5.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c027a0&gt;<br/><br/>    def test_is_color_temp_supported(self):<br/>        &quot;&quot;&quot;Test isColorTempSupported&quot;&quot;&quot;<br/>&gt;       assert is_color_temp_supported()<br/><span class="error">E       assert None</span><br/><span class="error">E        +  where None = is_color_temp_supported()</span><br/><br/>cases/test_picture.py:416: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:44:34 [INFO] TestCase test_is_color_temp_supported: Test isColorTempSupported (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test setColorTemp</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_set_color_temp[COLOR_WARM]</td>
-          <td class="col-duration">6.01</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c01c60&gt;<br/>expected = &#x27;COLOR_WARM&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_set_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test setColorTemp&quot;&quot;&quot;<br/>        set_color_temp(expected)<br/>        actual = get_color_temp()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;COLOR_WARM&#x27;</span><br/><br/>cases/test_picture.py:423: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:44:37 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test setColorTemp</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_set_color_temp[COLOR_NORMAL]</td>
-          <td class="col-duration">6.01</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c01ea0&gt;<br/>expected = &#x27;COLOR_NORMAL&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_set_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test setColorTemp&quot;&quot;&quot;<br/>        set_color_temp(expected)<br/>        actual = get_color_temp()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;COLOR_NORMAL&#x27;</span><br/><br/>cases/test_picture.py:423: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:44:43 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test setColorTemp</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_set_color_temp[COLOR_COLD]</td>
-          <td class="col-duration">6.01</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c00100&gt;<br/>expected = &#x27;COLOR_COLD&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_set_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test setColorTemp&quot;&quot;&quot;<br/>        set_color_temp(expected)<br/>        actual = get_color_temp()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;COLOR_COLD&#x27;</span><br/><br/>cases/test_picture.py:423: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:44:49 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test getColorTemp</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_get_color_temp[COLOR_WARM]</td>
-          <td class="col-duration">6.01</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c00850&gt;<br/>expected = &#x27;COLOR_WARM&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_get_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test getColorTemp&quot;&quot;&quot;<br/>        set_color_temp(expected)<br/>        actual = get_color_temp()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;COLOR_WARM&#x27;</span><br/><br/>cases/test_picture.py:430: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:44:55 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test getColorTemp</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_get_color_temp[COLOR_NORMAL]</td>
-          <td class="col-duration">6.01</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c005e0&gt;<br/>expected = &#x27;COLOR_NORMAL&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_get_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test getColorTemp&quot;&quot;&quot;<br/>        set_color_temp(expected)<br/>        actual = get_color_temp()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;COLOR_NORMAL&#x27;</span><br/><br/>cases/test_picture.py:430: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:45:01 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
-      <tbody class="failed results-table-row">
-        <tr>
-          <td class="col-result">Failed</td>
-          <td class="col-title">Test getColorTemp</td>
-          <td class="col-name">cases/test_picture.py::TestPicture::test_get_color_temp[COLOR_COLD]</td>
-          <td class="col-duration">6.01</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x780062c03340&gt;<br/>expected = &#x27;COLOR_COLD&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_get_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test getColorTemp&quot;&quot;&quot;<br/>        set_color_temp(expected)<br/>        actual = get_color_temp()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;COLOR_COLD&#x27;</span><br/><br/>cases/test_picture.py:430: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:45:07 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7b20e53687f0&gt;<br/><br/>    def test_is_color_temp_supported(self):<br/>        &quot;&quot;&quot;Test isColorTempSupported&quot;&quot;&quot;<br/>&gt;       assert PictureService.is_color_temp_supported()<br/><span class="error">E       assert False</span><br/><span class="error">E        +  where False = &lt;function PictureService.is_color_temp_supported at 0x7b20e5210160&gt;()</span><br/><span class="error">E        +    where &lt;function PictureService.is_color_temp_supported at 0x7b20e5210160&gt; = PictureService.is_color_temp_supported</span><br/><br/>cases/test_picture.py:260: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:16:41 [INFO] TestCase test_is_color_temp_supported: Test isColorTempSupported (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="skipped results-table-row">
         <tr>
-          <td class="col-result">Skipped</td>
-          <td class="col-title">Test getScreenshot</td>
+          <td class="col-result">Skipped</td>&lt;td class=&quot;col-title&quot;&gt;Test getScreenshot&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_screenshot::setup</td>
           <td class="col-duration">0.00</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log">(&#x27;/home/vi610712/dev/myagent/_work/4/s/cases/test_picture.py&#x27;, 169, &#x27;Skipped: api 尚未實作&#x27;)<br/></div></td></tr></tbody>
+            <div class="log">(&#x27;/home/vi610712/dev/myagent/_work/4/s/cases/test_picture.py&#x27;, 13, &#x27;Skipped: api 尚未實作&#x27;)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setEyeCareEnabled</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setVolume&lt;/td&gt;
+          <td class="col-name">cases/test_audio.py::TestAudio::test_set_volume[0]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:53:00 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setVolume&lt;/td&gt;
+          <td class="col-name">cases/test_audio.py::TestAudio::test_set_volume[50]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:53:10 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setVolume&lt;/td&gt;
+          <td class="col-name">cases/test_audio.py::TestAudio::test_set_volume[100]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:53:20 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getVolume&lt;/td&gt;
+          <td class="col-name">cases/test_audio.py::TestAudio::test_get_volume[0]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:53:30 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getVolume&lt;/td&gt;
+          <td class="col-name">cases/test_audio.py::TestAudio::test_get_volume[50]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:53:40 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getVolume&lt;/td&gt;
+          <td class="col-name">cases/test_audio.py::TestAudio::test_get_volume[100]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:53:50 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setMute&lt;/td&gt;
+          <td class="col-name">cases/test_audio.py::TestAudio::test_set_mute[True]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:54:00 [INFO] TestCase test_set_mute: Test setMute (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setMute&lt;/td&gt;
+          <td class="col-name">cases/test_audio.py::TestAudio::test_set_mute[False]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:54:10 [INFO] TestCase test_set_mute: Test setMute (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getMute&lt;/td&gt;
+          <td class="col-name">cases/test_audio.py::TestAudio::test_get_mute[True]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:54:20 [INFO] TestCase test_get_mute: Test getMute (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getMute&lt;/td&gt;
+          <td class="col-name">cases/test_audio.py::TestAudio::test_get_mute[False]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:54:30 [INFO] TestCase test_get_mute: Test getMute (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test switchToSettings&lt;/td&gt;
+          <td class="col-name">cases/test_control.py::TestControl::test_switch_to_settings[Left]</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:54:40 [INFO] TestCase test_switch_to_settings: Test switchToSettings (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test switchToDataTimeSettings&lt;/td&gt;
+          <td class="col-name">cases/test_control.py::TestControl::test_switch_to_data_time_settings[Left]</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:54:45 [INFO] TestCase test_switch_to_data_time_settings: Test switchToDataTimeSettings (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setEyeCareEnabled&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_eye_care_enabled[True]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:32:39 [INFO] TestCase test_set_eye_care_enabled: Test setEyeCareEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:54:50 [INFO] TestCase test_set_eye_care_enabled: Test setEyeCareEnabled (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setEyeCareEnabled</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setEyeCareEnabled&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_eye_care_enabled[False]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:32:45 [INFO] TestCase test_set_eye_care_enabled: Test setEyeCareEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:55:00 [INFO] TestCase test_set_eye_care_enabled: Test setEyeCareEnabled (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getEyeCareEnabled</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getEyeCareEnabled&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_eye_care_enabled[True]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:32:51 [INFO] TestCase test_get_eye_care_enabled: Test getEyeCareEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:55:10 [INFO] TestCase test_get_eye_care_enabled: Test getEyeCareEnabled (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getEyeCareEnabled</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getEyeCareEnabled&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_eye_care_enabled[False]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:32:57 [INFO] TestCase test_get_eye_care_enabled: Test getEyeCareEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:55:20 [INFO] TestCase test_get_eye_care_enabled: Test getEyeCareEnabled (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setBacklightAutoEnabled</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setBacklightAutoEnabled&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_backlight_auto_enabled[True]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:33:03 [INFO] TestCase test_set_backlight_auto_enabled: Test setBacklightAutoEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:55:30 [INFO] TestCase test_set_backlight_auto_enabled: Test setBacklightAutoEnabled (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setBacklightAutoEnabled</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setBacklightAutoEnabled&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_backlight_auto_enabled[False]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:33:09 [INFO] TestCase test_set_backlight_auto_enabled: Test setBacklightAutoEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:55:40 [INFO] TestCase test_set_backlight_auto_enabled: Test setBacklightAutoEnabled (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getBacklightAutoEnabled</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBacklightAutoEnabled&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_auto_enabled[True]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:33:15 [INFO] TestCase test_get_backlight_auto_enabled: Test getBacklightAutoEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:55:50 [INFO] TestCase test_get_backlight_auto_enabled: Test getBacklightAutoEnabled (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getBacklightAutoEnabled</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBacklightAutoEnabled&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_auto_enabled[False]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:33:21 [INFO] TestCase test_get_backlight_auto_enabled: Test getBacklightAutoEnabled (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:56:00 [INFO] TestCase test_get_backlight_auto_enabled: Test getBacklightAutoEnabled (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setBacklightLevel</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setBacklightLevel&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_backlight_level[0]</td>
-          <td class="col-duration">6.00</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:33:27 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:56:10 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setBacklightLevel</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setBacklightLevel&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_backlight_level[50]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:33:33 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:56:20 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setBacklightLevel</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setBacklightLevel&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_backlight_level[100]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:33:39 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:56:30 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getBacklightLevel</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBacklightLevel&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_level[0]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:33:45 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:56:40 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getBacklightLevel</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBacklightLevel&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_level[50]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:33:51 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:56:50 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getBacklightLevel</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBacklightLevel&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_level[100]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:33:57 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:57:00 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getBacklightSupport</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBacklightSupport&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_support</td>
-          <td class="col-duration">3.00</td></tr>
+          <td class="col-duration">5.00</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:34:03 [INFO] TestCase test_get_backlight_support: Test getBacklightSupport (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:57:10 [INFO] TestCase test_get_backlight_support: Test getBacklightSupport (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test CurrentSource</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getCurrentSource&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_current_source[HDMI1]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:34:06 [INFO] TestCase test_get_current_source: Test CurrentSource (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:57:15 [INFO] TestCase test_get_current_source: Test getCurrentSource (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test CurrentSource</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getCurrentSource&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_current_source[TYPE_C]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:34:12 [INFO] TestCase test_get_current_source: Test CurrentSource (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:57:25 [INFO] TestCase test_get_current_source: Test getCurrentSource (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test CurrentSource</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getCurrentSource&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_current_source[ANDROID]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:34:18 [INFO] TestCase test_get_current_source: Test CurrentSource (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:57:35 [INFO] TestCase test_get_current_source: Test getCurrentSource (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test switchSource</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test switchSource&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_switch_source[HDMI1]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:34:24 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:57:45 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test switchSource</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test switchSource&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_switch_source[TYPE_C]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:34:30 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:57:55 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test switchSource</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test switchSource&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_switch_source[ANDROID]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:34:36 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:58:05 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setSourceAliasEnable</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSourceAliasEnable&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_source_alias_enable[True]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:34:42 [INFO] TestCase test_set_source_alias_enable: Test setSourceAliasEnable (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:58:15 [INFO] TestCase test_set_source_alias_enable: Test setSourceAliasEnable (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setSourceAliasEnable</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSourceAliasEnable&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_source_alias_enable[False]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:34:48 [INFO] TestCase test_set_source_alias_enable: Test setSourceAliasEnable (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:58:25 [INFO] TestCase test_set_source_alias_enable: Test setSourceAliasEnable (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getSourceAliasEnable</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSourceAliasEnable&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_source_alias_enable[True]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:34:54 [INFO] TestCase test_get_source_alias_enable: Test getSourceAliasEnable (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:58:35 [INFO] TestCase test_get_source_alias_enable: Test getSourceAliasEnable (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getSourceAliasEnable</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSourceAliasEnable&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_source_alias_enable[False]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:35:00 [INFO] TestCase test_get_source_alias_enable: Test getSourceAliasEnable (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:58:45 [INFO] TestCase test_get_source_alias_enable: Test getSourceAliasEnable (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setPictureMode</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setPictureMode&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_picture_mode[PICTURE_CUSTOM]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:35:06 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:58:55 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setPictureMode</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setPictureMode&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_picture_mode[PICTURE_STANDARD]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:35:12 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:59:05 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setPictureMode</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setPictureMode&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_picture_mode[PICTURE_SOFT]</td>
-          <td class="col-duration">6.00</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:35:18 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:59:15 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setPictureMode</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setPictureMode&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_picture_mode[PICTURE_BRIGHT]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:35:24 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:59:25 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getPictureMode</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getPictureMode&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_picture_mode[PICTURE_CUSTOM]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:35:30 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:59:35 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getPictureMode</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getPictureMode&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_picture_mode[PICTURE_STANDARD]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:35:36 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:59:45 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getPictureMode</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getPictureMode&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_picture_mode[PICTURE_SOFT]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:35:42 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:59:55 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getPictureMode</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getPictureMode&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_picture_mode[PICTURE_BRIGHT]</td>
-          <td class="col-duration">6.01</td></tr>
+          <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:35:48 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:00:05 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getAllPictureModeList</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getAllPictureModeList&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_all_picture_mode_list</td>
-          <td class="col-duration">3.00</td></tr>
+          <td class="col-duration">5.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:35:54 [INFO] TestCase test_get_all_picture_mode_list: Test getAllPictureModeList (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:00:15 [INFO] TestCase test_get_all_picture_mode_list: Test getAllPictureModeList (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setContrast</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setContrast&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_contrast[0]</td>
-          <td class="col-duration">21.02</td></tr>
+          <td class="col-duration">35.04</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:35:57 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:00:20 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setContrast</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setContrast&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_contrast[50]</td>
-          <td class="col-duration">21.02</td></tr>
+          <td class="col-duration">35.04</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:36:18 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:00:55 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setContrast</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setContrast&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_set_contrast[100]</td>
-          <td class="col-duration">21.02</td></tr>
+          <td class="col-duration">35.04</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:36:39 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:59)<br/></div></td></tr></tbody>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:01:30 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:56)<br/></div></td></tr></tbody>
       <tbody class="passed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getContrast</td>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getContrast&lt;/td&gt;
           <td class="col-name">cases/test_picture.py::TestPicture::test_get_contrast[0]</td>
-          <td class="col-duration">21.02</td></tr>
+          <td class="col-duration">35.04</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-04 13:37:00 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:59)<br/></div></td></tr></tbody></table></body></html>
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:02:05 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getContrast&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_contrast[50]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:02:40 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getContrast&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_contrast[100]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:03:15 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test isContrastSupported&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_is_contrast_supported</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:03:51 [INFO] TestCase test_is_contrast_supported: Test isContrastSupported (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSaturation&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_saturation[0]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:04:26 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSaturation&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_saturation[50]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:05:01 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSaturation&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_saturation[100]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:05:36 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSaturation&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_saturation[0]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:06:11 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSaturation&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_saturation[50]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:06:46 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSaturation&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_saturation[100]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:07:21 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test isSaturationSupported&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_is_saturation_supported</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:07:56 [INFO] TestCase test_is_saturation_supported: Test isSaturationSupported (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setBrightness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_brightness[0]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:08:31 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setBrightness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_brightness[50]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:09:06 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setBrightness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_brightness[100]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:09:41 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBrightness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_brightness[0]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:10:16 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBrightness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_brightness[50]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:10:51 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBrightness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_brightness[100]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:11:26 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test isBrightnessSupported&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_is_brightness_supported</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:12:01 [INFO] TestCase test_is_brightness_supported: Test isBrightnessSupported (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSharpness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_sharpness[0]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:12:36 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSharpness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_sharpness[50]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:13:11 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSharpness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_sharpness[100]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:13:46 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSharpness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_sharpness[0]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:14:21 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSharpness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_sharpness[50]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:14:56 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSharpness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_sharpness[100]</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:15:31 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test isSharpnessSupported&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_is_sharpness_supported</td>
+          <td class="col-duration">35.04</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:16:06 [INFO] TestCase test_is_sharpness_supported: Test isSharpnessSupported (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setColorTemp&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_color_temp[COLOR_WARM]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:16:47 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setColorTemp&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_color_temp[COLOR_NORMAL]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:16:57 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setColorTemp&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_color_temp[COLOR_COLD]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:17:07 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getColorTemp&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_color_temp[COLOR_WARM]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:17:17 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getColorTemp&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_color_temp[COLOR_NORMAL]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:17:27 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getColorTemp&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_color_temp[COLOR_COLD]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:17:37 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test SetAssetTag&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_set_asset_tag[Test1]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:17:47 [INFO] TestCase test_set_asset_tag: Test SetAssetTag (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test SetAssetTag&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_set_asset_tag[100]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:17:57 [INFO] TestCase test_set_asset_tag: Test SetAssetTag (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test GetAssetTag&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_asset_tag[Test1]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:18:07 [INFO] TestCase test_get_asset_tag: Test GetAssetTag (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test GetAssetTag&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_asset_tag[100]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:18:17 [INFO] TestCase test_get_asset_tag: Test GetAssetTag (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test get_build_number&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_build_number</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:18:27 [INFO] TestCase test_get_build_number: Test get_build_number (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test get_serial_number&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_serial_number</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:18:32 [INFO] TestCase test_get_serial_number: Test get_serial_number (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getRunningTime&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_running_time</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:18:37 [INFO] TestCase test_get_running_time: Test getRunningTime (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test SystemPropertyString&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_system_property_string</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:18:42 [INFO] TestCase test_get_system_property_string: Test SystemPropertyString (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test SystemPropertyInt&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_system_property_int</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:18:47 [INFO] TestCase test_get_system_property_int: Test SystemPropertyInt (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test SystemPropertyLong&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_system_property_long</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:18:52 [INFO] TestCase test_get_system_property_long: Test SystemPropertyLong (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test SystemPropertyBoolean&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_system_property_boolean</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:18:57 [INFO] TestCase test_get_system_property_boolean: Test SystemPropertyBoolean (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSettingPasswordEnable&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_set_setting_password_enable[True]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:19:02 [INFO] TestCase test_set_setting_password_enable: Test setSettingPasswordEnable (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSettingPasswordEnable&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_set_setting_password_enable[False]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:19:12 [INFO] TestCase test_set_setting_password_enable: Test setSettingPasswordEnable (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSettingPasswordEnable&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_setting_password_enable[True]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:19:22 [INFO] TestCase test_get_setting_password_enable: Test getSettingPasswordEnable (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSettingPasswordEnable&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_setting_password_enable[False]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:19:32 [INFO] TestCase test_get_setting_password_enable: Test getSettingPasswordEnable (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSettingPassword&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_setting_password[1111]</td>
+          <td class="col-duration">20.02</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:19:42 [INFO] TestCase test_setting_password: Test setSettingPassword (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSettingPassword&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_setting_password[0000]</td>
+          <td class="col-duration">15.02</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:20:02 [INFO] TestCase test_setting_password: Test setSettingPassword (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSettingPassword&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_getsetting_password[1111]</td>
+          <td class="col-duration">15.02</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:20:17 [INFO] TestCase test_getsetting_password: Test getSettingPassword (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSettingPassword&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_getsetting_password[0000]</td>
+          <td class="col-duration">15.02</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:20:32 [INFO] TestCase test_getsetting_password: Test getSettingPassword (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test cleanSettingPassword&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_clean_setting_password</td>
+          <td class="col-duration">20.02</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:20:47 [INFO] TestCase test_clean_setting_password: Test cleanSettingPassword (conftest.py:56)<br/></div></td></tr></tbody></table></body></html>
