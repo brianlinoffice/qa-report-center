@@ -405,107 +405,832 @@ function filter_table(elem) {
 }
 </script>
     <h1>Automation_Test_Report.html</h1>
-    <p>Report generated on 05-Nov-2025 at 10:23:43 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v2.0.1</p>
+    <p>Report generated on 06-Nov-2025 at 12:16:41 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v2.0.1</p>
     <h2>Summary</h2>
-    <p>10 tests ran in 102.32 seconds. </p>
-    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">10 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>, <input checked="true" class="filter" data-test-result="rerun" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="rerun">0 rerun</span>
+    <p>101 tests ran in 1409.70 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">8 passed</span>, <input checked="true" class="filter" data-test-result="skipped" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">1 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">93 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>, <input checked="true" class="filter" data-test-result="rerun" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="rerun">0 rerun</span>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
         <tr>
-          <th class="sortable result initial-sort" col="result">Result</th>
-          <th class="sortable" col="col-title">Description</th>
+          <th class="sortable result initial-sort" col="result">Result</th>&lt;th class=&quot;sortable col-title&quot; data-column-type=&quot;text&quot;&gt;Description&lt;/th&gt;
           <th class="sortable" col="name">Test</th>
           <th class="sortable numeric" col="duration">Duration</th></tr>
         <tr hidden="true" id="not-found-message">
           <th colspan="4">No results found. Try to check the filters</th></tr></thead>
-      <tbody class="passed results-table-row">
+      <tbody class="failed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setVolume</td>
-          <td class="col-name">cases/test_audio.py::TestAudio::test_set_volume[0]</td>
-          <td class="col-duration">10.01</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-05 10:22:03 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:56)<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setVolume</td>
-          <td class="col-name">cases/test_audio.py::TestAudio::test_set_volume[50]</td>
-          <td class="col-duration">10.01</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-05 10:22:13 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:56)<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setVolume</td>
-          <td class="col-name">cases/test_audio.py::TestAudio::test_set_volume[100]</td>
-          <td class="col-duration">10.01</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-05 10:22:23 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:56)<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getVolume</td>
-          <td class="col-name">cases/test_audio.py::TestAudio::test_get_volume[0]</td>
-          <td class="col-duration">10.01</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-05 10:22:33 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:56)<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getVolume</td>
-          <td class="col-name">cases/test_audio.py::TestAudio::test_get_volume[50]</td>
-          <td class="col-duration">10.01</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-05 10:22:43 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:56)<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getVolume</td>
-          <td class="col-name">cases/test_audio.py::TestAudio::test_get_volume[100]</td>
-          <td class="col-duration">10.01</td></tr>
-        <tr>
-          <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-05 10:22:53 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:56)<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
-        <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setMute</td>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setMute&lt;/td&gt;
           <td class="col-name">cases/test_audio.py::TestAudio::test_set_mute[True]</td>
           <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-05 10:23:03 [INFO] TestCase test_set_mute: Test setMute (conftest.py:56)<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
+            <div class="log">self = &lt;cases.test_audio.TestAudio object at 0x7dc64bc4f820&gt;, expected = True<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_set_mute(self, expected):<br/>        &quot;&quot;&quot;Test setMute&quot;&quot;&quot;<br/>        AudioService.set_mute(expected)<br/>        actual = AudioService.get_mute()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == True</span><br/><br/>cases/test_audio.py:32: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:54:13 [INFO] TestCase test_set_mute: Test setMute (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test setMute</td>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setMute&lt;/td&gt;
           <td class="col-name">cases/test_audio.py::TestAudio::test_set_mute[False]</td>
           <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-05 10:23:13 [INFO] TestCase test_set_mute: Test setMute (conftest.py:56)<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
+            <div class="log">self = &lt;cases.test_audio.TestAudio object at 0x7dc64bc4f760&gt;, expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_set_mute(self, expected):<br/>        &quot;&quot;&quot;Test setMute&quot;&quot;&quot;<br/>        AudioService.set_mute(expected)<br/>        actual = AudioService.get_mute()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == False</span><br/><br/>cases/test_audio.py:32: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:54:23 [INFO] TestCase test_set_mute: Test setMute (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getMute</td>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getMute&lt;/td&gt;
           <td class="col-name">cases/test_audio.py::TestAudio::test_get_mute[True]</td>
           <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-05 10:23:23 [INFO] TestCase test_get_mute: Test getMute (conftest.py:56)<br/></div></td></tr></tbody>
-      <tbody class="passed results-table-row">
+            <div class="log">self = &lt;cases.test_audio.TestAudio object at 0x7dc64bc4e4a0&gt;, expected = True<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_mute(self, expected):<br/>        &quot;&quot;&quot;Test getMute&quot;&quot;&quot;<br/>        AudioService.set_mute(expected)<br/>        actual = AudioService.get_mute()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == True</span><br/><br/>cases/test_audio.py:39: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:54:33 [INFO] TestCase test_get_mute: Test getMute (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-title">Test getMute</td>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getMute&lt;/td&gt;
           <td class="col-name">cases/test_audio.py::TestAudio::test_get_mute[False]</td>
           <td class="col-duration">10.01</td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-05 10:23:33 [INFO] TestCase test_get_mute: Test getMute (conftest.py:56)<br/></div></td></tr></tbody></table></body></html>
+            <div class="log">self = &lt;cases.test_audio.TestAudio object at 0x7dc64bc4e350&gt;, expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_mute(self, expected):<br/>        &quot;&quot;&quot;Test getMute&quot;&quot;&quot;<br/>        AudioService.set_mute(expected)<br/>        actual = AudioService.get_mute()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == False</span><br/><br/>cases/test_audio.py:39: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:54:43 [INFO] TestCase test_get_mute: Test getMute (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setEyeCareEnabled&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_eye_care_enabled[True]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb21090&gt;<br/>expected = True<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_set_eye_care_enabled(self, expected):<br/>        &quot;&quot;&quot;Test setEyeCareEnabled&quot;&quot;&quot;<br/>        PictureService.set_eye_care_enabled(expected)<br/>        actual = PictureService.get_eye_care_enabled()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == True</span><br/><br/>cases/test_picture.py:24: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:55:03 [INFO] TestCase test_set_eye_care_enabled: Test setEyeCareEnabled (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setEyeCareEnabled&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_eye_care_enabled[False]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb211b0&gt;<br/>expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_set_eye_care_enabled(self, expected):<br/>        &quot;&quot;&quot;Test setEyeCareEnabled&quot;&quot;&quot;<br/>        PictureService.set_eye_care_enabled(expected)<br/>        actual = PictureService.get_eye_care_enabled()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == False</span><br/><br/>cases/test_picture.py:24: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:55:13 [INFO] TestCase test_set_eye_care_enabled: Test setEyeCareEnabled (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getEyeCareEnabled&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_eye_care_enabled[True]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb21480&gt;<br/>expected = True<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_eye_care_enabled(self, expected):<br/>        &quot;&quot;&quot;Test getEyeCareEnabled&quot;&quot;&quot;<br/>        PictureService.set_eye_care_enabled(expected)<br/>        actual = PictureService.get_eye_care_enabled()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == True</span><br/><br/>cases/test_picture.py:31: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:55:23 [INFO] TestCase test_get_eye_care_enabled: Test getEyeCareEnabled (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getEyeCareEnabled&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_eye_care_enabled[False]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb21540&gt;<br/>expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_eye_care_enabled(self, expected):<br/>        &quot;&quot;&quot;Test getEyeCareEnabled&quot;&quot;&quot;<br/>        PictureService.set_eye_care_enabled(expected)<br/>        actual = PictureService.get_eye_care_enabled()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == False</span><br/><br/>cases/test_picture.py:31: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:55:33 [INFO] TestCase test_get_eye_care_enabled: Test getEyeCareEnabled (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setBacklightAutoEnabled&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_backlight_auto_enabled[True]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb211e0&gt;<br/>expected = True<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_set_backlight_auto_enabled(self, expected):<br/>        &quot;&quot;&quot;Test setBacklightAutoEnabled&quot;&quot;&quot;<br/>        PictureService.set_backlight_auto_enabled(expected)<br/>        actual = PictureService.get_backlight_auto_enabled()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == True</span><br/><br/>cases/test_picture.py:38: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:55:44 [INFO] TestCase test_set_backlight_auto_enabled: Test setBacklightAutoEnabled (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setBacklightAutoEnabled&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_backlight_auto_enabled[False]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb20dc0&gt;<br/>expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_set_backlight_auto_enabled(self, expected):<br/>        &quot;&quot;&quot;Test setBacklightAutoEnabled&quot;&quot;&quot;<br/>        PictureService.set_backlight_auto_enabled(expected)<br/>        actual = PictureService.get_backlight_auto_enabled()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == False</span><br/><br/>cases/test_picture.py:38: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:55:54 [INFO] TestCase test_set_backlight_auto_enabled: Test setBacklightAutoEnabled (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBacklightAutoEnabled&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_auto_enabled[True]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb21b70&gt;<br/>expected = True<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_backlight_auto_enabled(self, expected):<br/>        &quot;&quot;&quot;Test getBacklightAutoEnabled&quot;&quot;&quot;<br/>        PictureService.set_backlight_auto_enabled(expected)<br/>        actual = PictureService.get_backlight_auto_enabled()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == True</span><br/><br/>cases/test_picture.py:45: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:56:04 [INFO] TestCase test_get_backlight_auto_enabled: Test getBacklightAutoEnabled (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBacklightAutoEnabled&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_auto_enabled[False]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb21c30&gt;<br/>expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_backlight_auto_enabled(self, expected):<br/>        &quot;&quot;&quot;Test getBacklightAutoEnabled&quot;&quot;&quot;<br/>        PictureService.set_backlight_auto_enabled(expected)<br/>        actual = PictureService.get_backlight_auto_enabled()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == False</span><br/><br/>cases/test_picture.py:45: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:56:14 [INFO] TestCase test_get_backlight_auto_enabled: Test getBacklightAutoEnabled (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setBacklightLevel&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_backlight_level[0]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb21750&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_backlight_level(self, expected):<br/>        &quot;&quot;&quot;Test setBacklightLevel&quot;&quot;&quot;<br/>        PictureService.set_backlight_level(expected)<br/>        actual = PictureService.get_backlight_level()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 0</span><br/><br/>cases/test_picture.py:52: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:56:24 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setBacklightLevel&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_backlight_level[50]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb21690&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_backlight_level(self, expected):<br/>        &quot;&quot;&quot;Test setBacklightLevel&quot;&quot;&quot;<br/>        PictureService.set_backlight_level(expected)<br/>        actual = PictureService.get_backlight_level()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 50</span><br/><br/>cases/test_picture.py:52: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:56:34 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setBacklightLevel&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_backlight_level[100]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb220e0&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_backlight_level(self, expected):<br/>        &quot;&quot;&quot;Test setBacklightLevel&quot;&quot;&quot;<br/>        PictureService.set_backlight_level(expected)<br/>        actual = PictureService.get_backlight_level()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_picture.py:52: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:56:44 [INFO] TestCase test_set_backlight_level: Test setBacklightLevel (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBacklightLevel&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_level[0]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb22290&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_backlight_level(self, expected):<br/>        &quot;&quot;&quot;Test getBacklightLevel&quot;&quot;&quot;<br/>        PictureService.set_backlight_level(expected)<br/>        actual = PictureService.get_backlight_level()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 0</span><br/><br/>cases/test_picture.py:59: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:56:54 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBacklightLevel&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_level[50]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb21b10&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_backlight_level(self, expected):<br/>        &quot;&quot;&quot;Test getBacklightLevel&quot;&quot;&quot;<br/>        PictureService.set_backlight_level(expected)<br/>        actual = PictureService.get_backlight_level()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 50</span><br/><br/>cases/test_picture.py:59: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:57:04 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBacklightLevel&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_level[100]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb20fa0&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_backlight_level(self, expected):<br/>        &quot;&quot;&quot;Test getBacklightLevel&quot;&quot;&quot;<br/>        PictureService.set_backlight_level(expected)<br/>        actual = PictureService.get_backlight_level()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_picture.py:59: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:57:14 [INFO] TestCase test_get_backlight_level: Test getBacklightLevel (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBacklightSupport&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_backlight_support</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb22350&gt;<br/><br/>    def test_get_backlight_support(self):<br/>        &quot;&quot;&quot;Test getBacklightSupport&quot;&quot;&quot;<br/>        actual = PictureService.is_backlight_supported()<br/>&gt;       assert actual<br/><span class="error">E       assert None</span><br/><br/>cases/test_picture.py:64: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:57:24 [INFO] TestCase test_get_backlight_support: Test getBacklightSupport (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getCurrentSource&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_current_source[HDMI1]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb224a0&gt;<br/>expected = &#x27;HDMI1&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;HDMI1&quot;, &quot;TYPE_C&quot;, &quot;ANDROID&quot;])<br/>    def test_get_current_source(self, expected):<br/>        &quot;&quot;&quot;Test getCurrentSource&quot;&quot;&quot;<br/>        PictureService.switch_source(expected)<br/>        actual = PictureService.get_current_source()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;HDMI1&#x27;</span><br/><br/>cases/test_picture.py:71: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:57:29 [INFO] TestCase test_get_current_source: Test getCurrentSource (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getCurrentSource&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_current_source[TYPE_C]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb22620&gt;<br/>expected = &#x27;TYPE_C&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;HDMI1&quot;, &quot;TYPE_C&quot;, &quot;ANDROID&quot;])<br/>    def test_get_current_source(self, expected):<br/>        &quot;&quot;&quot;Test getCurrentSource&quot;&quot;&quot;<br/>        PictureService.switch_source(expected)<br/>        actual = PictureService.get_current_source()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;TYPE_C&#x27;</span><br/><br/>cases/test_picture.py:71: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:57:39 [INFO] TestCase test_get_current_source: Test getCurrentSource (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getCurrentSource&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_current_source[ANDROID]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb21f30&gt;<br/>expected = &#x27;ANDROID&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;HDMI1&quot;, &quot;TYPE_C&quot;, &quot;ANDROID&quot;])<br/>    def test_get_current_source(self, expected):<br/>        &quot;&quot;&quot;Test getCurrentSource&quot;&quot;&quot;<br/>        PictureService.switch_source(expected)<br/>        actual = PictureService.get_current_source()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;ANDROID&#x27;</span><br/><br/>cases/test_picture.py:71: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:57:49 [INFO] TestCase test_get_current_source: Test getCurrentSource (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test switchSource&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_switch_source[HDMI1]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb21990&gt;<br/>expected = &#x27;HDMI1&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;HDMI1&quot;, &quot;TYPE_C&quot;, &quot;ANDROID&quot;])<br/>    def test_switch_source(self, expected):<br/>        &quot;&quot;&quot;Test switchSource&quot;&quot;&quot;<br/>        PictureService.switch_source(expected)<br/>        actual = PictureService.get_current_source()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;HDMI1&#x27;</span><br/><br/>cases/test_picture.py:78: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:57:59 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test switchSource&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_switch_source[TYPE_C]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb22890&gt;<br/>expected = &#x27;TYPE_C&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;HDMI1&quot;, &quot;TYPE_C&quot;, &quot;ANDROID&quot;])<br/>    def test_switch_source(self, expected):<br/>        &quot;&quot;&quot;Test switchSource&quot;&quot;&quot;<br/>        PictureService.switch_source(expected)<br/>        actual = PictureService.get_current_source()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;TYPE_C&#x27;</span><br/><br/>cases/test_picture.py:78: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:58:09 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test switchSource&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_switch_source[ANDROID]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb22b00&gt;<br/>expected = &#x27;ANDROID&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;HDMI1&quot;, &quot;TYPE_C&quot;, &quot;ANDROID&quot;])<br/>    def test_switch_source(self, expected):<br/>        &quot;&quot;&quot;Test switchSource&quot;&quot;&quot;<br/>        PictureService.switch_source(expected)<br/>        actual = PictureService.get_current_source()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;ANDROID&#x27;</span><br/><br/>cases/test_picture.py:78: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:58:19 [INFO] TestCase test_switch_source: Test switchSource (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSourceAliasEnable&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_source_alias_enable[True]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb22dd0&gt;<br/>expected = True<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_set_source_alias_enable(self, expected):<br/>        &quot;&quot;&quot;Test setSourceAliasEnable&quot;&quot;&quot;<br/>        PictureService.set_source_alias_enable(expected)<br/>        actual = PictureService.get_source_alias_enable()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == True</span><br/><br/>cases/test_picture.py:85: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:58:29 [INFO] TestCase test_set_source_alias_enable: Test setSourceAliasEnable (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSourceAliasEnable&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_source_alias_enable[False]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb22f20&gt;<br/>expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_set_source_alias_enable(self, expected):<br/>        &quot;&quot;&quot;Test setSourceAliasEnable&quot;&quot;&quot;<br/>        PictureService.set_source_alias_enable(expected)<br/>        actual = PictureService.get_source_alias_enable()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == False</span><br/><br/>cases/test_picture.py:85: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:58:39 [INFO] TestCase test_set_source_alias_enable: Test setSourceAliasEnable (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSourceAliasEnable&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_source_alias_enable[True]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb22b60&gt;<br/>expected = True<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_source_alias_enable(self, expected):<br/>        &quot;&quot;&quot;Test getSourceAliasEnable&quot;&quot;&quot;<br/>        PictureService.set_source_alias_enable(expected)<br/>        actual = PictureService.get_source_alias_enable()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == True</span><br/><br/>cases/test_picture.py:92: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:58:49 [INFO] TestCase test_get_source_alias_enable: Test getSourceAliasEnable (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSourceAliasEnable&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_source_alias_enable[False]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb22c20&gt;<br/>expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_source_alias_enable(self, expected):<br/>        &quot;&quot;&quot;Test getSourceAliasEnable&quot;&quot;&quot;<br/>        PictureService.set_source_alias_enable(expected)<br/>        actual = PictureService.get_source_alias_enable()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == False</span><br/><br/>cases/test_picture.py:92: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:58:59 [INFO] TestCase test_get_source_alias_enable: Test getSourceAliasEnable (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setPictureMode&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_picture_mode[PICTURE_CUSTOM]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb23430&gt;<br/>expected = &#x27;PICTURE_CUSTOM&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;PICTURE_CUSTOM&quot;, &quot;PICTURE_STANDARD&quot;, &quot;PICTURE_SOFT&quot;, &quot;PICTURE_BRIGHT&quot;])<br/>    def test_set_picture_mode(self, expected):<br/>        &quot;&quot;&quot;Test setPictureMode&quot;&quot;&quot;<br/>        PictureService.set_picture_mode(expected)<br/>        actual = PictureService.get_picture_mode()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;PICTURE_CUSTOM&#x27;</span><br/><br/>cases/test_picture.py:99: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:59:09 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setPictureMode&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_picture_mode[PICTURE_STANDARD]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb234f0&gt;<br/>expected = &#x27;PICTURE_STANDARD&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;PICTURE_CUSTOM&quot;, &quot;PICTURE_STANDARD&quot;, &quot;PICTURE_SOFT&quot;, &quot;PICTURE_BRIGHT&quot;])<br/>    def test_set_picture_mode(self, expected):<br/>        &quot;&quot;&quot;Test setPictureMode&quot;&quot;&quot;<br/>        PictureService.set_picture_mode(expected)<br/>        actual = PictureService.get_picture_mode()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;PICTURE_STANDARD&#x27;</span><br/><br/>cases/test_picture.py:99: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:59:19 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setPictureMode&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_picture_mode[PICTURE_SOFT]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb23190&gt;<br/>expected = &#x27;PICTURE_SOFT&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;PICTURE_CUSTOM&quot;, &quot;PICTURE_STANDARD&quot;, &quot;PICTURE_SOFT&quot;, &quot;PICTURE_BRIGHT&quot;])<br/>    def test_set_picture_mode(self, expected):<br/>        &quot;&quot;&quot;Test setPictureMode&quot;&quot;&quot;<br/>        PictureService.set_picture_mode(expected)<br/>        actual = PictureService.get_picture_mode()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;PICTURE_SOFT&#x27;</span><br/><br/>cases/test_picture.py:99: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:59:29 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setPictureMode&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_picture_mode[PICTURE_BRIGHT]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb232e0&gt;<br/>expected = &#x27;PICTURE_BRIGHT&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;PICTURE_CUSTOM&quot;, &quot;PICTURE_STANDARD&quot;, &quot;PICTURE_SOFT&quot;, &quot;PICTURE_BRIGHT&quot;])<br/>    def test_set_picture_mode(self, expected):<br/>        &quot;&quot;&quot;Test setPictureMode&quot;&quot;&quot;<br/>        PictureService.set_picture_mode(expected)<br/>        actual = PictureService.get_picture_mode()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;PICTURE_BRIGHT&#x27;</span><br/><br/>cases/test_picture.py:99: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:59:39 [INFO] TestCase test_set_picture_mode: Test setPictureMode (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getPictureMode&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_picture_mode[PICTURE_CUSTOM]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb239d0&gt;<br/>expected = &#x27;PICTURE_CUSTOM&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;PICTURE_CUSTOM&quot;, &quot;PICTURE_STANDARD&quot;, &quot;PICTURE_SOFT&quot;, &quot;PICTURE_BRIGHT&quot;])<br/>    def test_get_picture_mode(self, expected):<br/>        &quot;&quot;&quot;Test getPictureMode&quot;&quot;&quot;<br/>        PictureService.set_picture_mode(expected)<br/>        actual = PictureService.get_picture_mode()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;PICTURE_CUSTOM&#x27;</span><br/><br/>cases/test_picture.py:106: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:59:49 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getPictureMode&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_picture_mode[PICTURE_STANDARD]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb237f0&gt;<br/>expected = &#x27;PICTURE_STANDARD&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;PICTURE_CUSTOM&quot;, &quot;PICTURE_STANDARD&quot;, &quot;PICTURE_SOFT&quot;, &quot;PICTURE_BRIGHT&quot;])<br/>    def test_get_picture_mode(self, expected):<br/>        &quot;&quot;&quot;Test getPictureMode&quot;&quot;&quot;<br/>        PictureService.set_picture_mode(expected)<br/>        actual = PictureService.get_picture_mode()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;PICTURE_STANDARD&#x27;</span><br/><br/>cases/test_picture.py:106: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:59:59 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getPictureMode&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_picture_mode[PICTURE_SOFT]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1fac0&gt;<br/>expected = &#x27;PICTURE_SOFT&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;PICTURE_CUSTOM&quot;, &quot;PICTURE_STANDARD&quot;, &quot;PICTURE_SOFT&quot;, &quot;PICTURE_BRIGHT&quot;])<br/>    def test_get_picture_mode(self, expected):<br/>        &quot;&quot;&quot;Test getPictureMode&quot;&quot;&quot;<br/>        PictureService.set_picture_mode(expected)<br/>        actual = PictureService.get_picture_mode()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;PICTURE_SOFT&#x27;</span><br/><br/>cases/test_picture.py:106: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:00:09 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getPictureMode&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_picture_mode[PICTURE_BRIGHT]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1ff40&gt;<br/>expected = &#x27;PICTURE_BRIGHT&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;PICTURE_CUSTOM&quot;, &quot;PICTURE_STANDARD&quot;, &quot;PICTURE_SOFT&quot;, &quot;PICTURE_BRIGHT&quot;])<br/>    def test_get_picture_mode(self, expected):<br/>        &quot;&quot;&quot;Test getPictureMode&quot;&quot;&quot;<br/>        PictureService.set_picture_mode(expected)<br/>        actual = PictureService.get_picture_mode()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;PICTURE_BRIGHT&#x27;</span><br/><br/>cases/test_picture.py:106: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:00:19 [INFO] TestCase test_get_picture_mode: Test getPictureMode (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getAllPictureModeList&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_all_picture_mode_list</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1fdc0&gt;<br/><br/>    def test_get_all_picture_mode_list(self):<br/>        &quot;&quot;&quot;Test getAllPictureModeList&quot;&quot;&quot;<br/>        actual = PictureService.get_all_picture_mode_list()<br/>        expected = &quot;[PICTURE_CUSTOM, PICTURE_STANDARD, PICTURE_SOFT, PICTURE_PC, PICTURE_BRIGHT]&quot;<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;[PICTURE_CUSTOM, PICTURE_STANDARD, PICTURE_SOFT, PICTURE_PC, PICTURE_BRIGHT]&#x27;</span><br/><br/>cases/test_picture.py:112: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:00:29 [INFO] TestCase test_get_all_picture_mode_list: Test getAllPictureModeList (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setContrast&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_contrast[0]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb23310&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_contrast(self, expected):<br/>        &quot;&quot;&quot;Test setContrast&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_contrast(expected)<br/>        actual = PictureService.get_contrast()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 0</span><br/><br/>cases/test_picture.py:121: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:00:34 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setContrast&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_contrast[50]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb227a0&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_contrast(self, expected):<br/>        &quot;&quot;&quot;Test setContrast&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_contrast(expected)<br/>        actual = PictureService.get_contrast()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 50</span><br/><br/>cases/test_picture.py:121: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:00:59 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setContrast&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_contrast[100]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb22380&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_contrast(self, expected):<br/>        &quot;&quot;&quot;Test setContrast&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_contrast(expected)<br/>        actual = PictureService.get_contrast()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_picture.py:121: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:01:24 [INFO] TestCase test_set_contrast: Test setContrast (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getContrast&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_contrast[0]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1feb0&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_contrast(self, expected):<br/>        &quot;&quot;&quot;Test getContrast&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_contrast(expected)<br/>        actual = PictureService.get_contrast()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 0</span><br/><br/>cases/test_picture.py:131: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:01:49 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getContrast&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_contrast[50]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1fc70&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_contrast(self, expected):<br/>        &quot;&quot;&quot;Test getContrast&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_contrast(expected)<br/>        actual = PictureService.get_contrast()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 50</span><br/><br/>cases/test_picture.py:131: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:02:14 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getContrast&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_contrast[100]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1f880&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_contrast(self, expected):<br/>        &quot;&quot;&quot;Test getContrast&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_contrast(expected)<br/>        actual = PictureService.get_contrast()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_picture.py:131: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:02:39 [INFO] TestCase test_get_contrast: Test getContrast (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test isContrastSupported&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_is_contrast_supported</td>
+          <td class="col-duration">20.02</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1f700&gt;<br/><br/>    def test_is_contrast_supported(self):<br/>        &quot;&quot;&quot;Test isContrastSupported&quot;&quot;&quot;<br/>        PictureService.switch_to_android()<br/>        current = PictureService.get_current_source()<br/>        contrast_supported = PictureService.is_contrast_supported()<br/>&gt;       assert current == &quot;ANDROID&quot;<br/><span class="error">E       AssertionError: assert None == &#x27;ANDROID&#x27;</span><br/><br/>cases/test_picture.py:139: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:03:04 [INFO] TestCase test_is_contrast_supported: Test isContrastSupported (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSaturation&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_saturation[0]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1e110&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_saturation(self, expected):<br/>        &quot;&quot;&quot;Test setSaturation&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_saturation(expected)<br/>        actual = PictureService.get_saturation()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 0</span><br/><br/>cases/test_picture.py:157: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:03:24 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSaturation&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_saturation[50]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1f370&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_saturation(self, expected):<br/>        &quot;&quot;&quot;Test setSaturation&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_saturation(expected)<br/>        actual = PictureService.get_saturation()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 50</span><br/><br/>cases/test_picture.py:157: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:03:49 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSaturation&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_saturation[100]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1f250&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_saturation(self, expected):<br/>        &quot;&quot;&quot;Test setSaturation&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_saturation(expected)<br/>        actual = PictureService.get_saturation()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_picture.py:157: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:04:15 [INFO] TestCase test_set_saturation: Test setSaturation (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSaturation&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_saturation[0]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1ef50&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_saturation(self, expected):<br/>        &quot;&quot;&quot;Test getSaturation&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_saturation(expected)<br/>        actual = PictureService.get_saturation()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 0</span><br/><br/>cases/test_picture.py:167: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:04:40 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSaturation&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_saturation[50]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1cbe0&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_saturation(self, expected):<br/>        &quot;&quot;&quot;Test getSaturation&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_saturation(expected)<br/>        actual = PictureService.get_saturation()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 50</span><br/><br/>cases/test_picture.py:167: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:05:05 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSaturation&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_saturation[100]</td>
+          <td class="col-duration">25.02</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1d780&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_saturation(self, expected):<br/>        &quot;&quot;&quot;Test getSaturation&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_saturation(expected)<br/>        actual = PictureService.get_saturation()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_picture.py:167: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:05:30 [INFO] TestCase test_get_saturation: Test getSaturation (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test isSaturationSupported&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_is_saturation_supported</td>
+          <td class="col-duration">20.02</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1d6c0&gt;<br/><br/>    def test_is_saturation_supported(self):<br/>        &quot;&quot;&quot;Test isSaturationSupported&quot;&quot;&quot;<br/>        PictureService.switch_to_android()<br/>        current = PictureService.get_current_source()<br/>        saturation_supported = PictureService.is_saturation_supported()<br/>&gt;       assert current == &quot;ANDROID&quot;<br/><span class="error">E       AssertionError: assert None == &#x27;ANDROID&#x27;</span><br/><br/>cases/test_picture.py:175: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:05:55 [INFO] TestCase test_is_saturation_supported: Test isSaturationSupported (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setBrightness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_brightness[0]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1d300&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_brightness(self, expected):<br/>        &quot;&quot;&quot;Test setBrightness&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_brightness(expected)<br/>        actual = PictureService.get_brightness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 0</span><br/><br/>cases/test_picture.py:193: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:06:15 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setBrightness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_brightness[50]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1d3c0&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_brightness(self, expected):<br/>        &quot;&quot;&quot;Test setBrightness&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_brightness(expected)<br/>        actual = PictureService.get_brightness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 50</span><br/><br/>cases/test_picture.py:193: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:06:40 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setBrightness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_brightness[100]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1d450&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_brightness(self, expected):<br/>        &quot;&quot;&quot;Test setBrightness&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_brightness(expected)<br/>        actual = PictureService.get_brightness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_picture.py:193: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:07:05 [INFO] TestCase test_set_brightness: Test setBrightness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBrightness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_brightness[0]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1cdc0&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_brightness(self, expected):<br/>        &quot;&quot;&quot;Test getBrightness&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_brightness(expected)<br/>        actual = PictureService.get_brightness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 0</span><br/><br/>cases/test_picture.py:203: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:07:30 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBrightness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_brightness[50]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1cd00&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_brightness(self, expected):<br/>        &quot;&quot;&quot;Test getBrightness&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_brightness(expected)<br/>        actual = PictureService.get_brightness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 50</span><br/><br/>cases/test_picture.py:203: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:07:55 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getBrightness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_brightness[100]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1cf10&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_brightness(self, expected):<br/>        &quot;&quot;&quot;Test getBrightness&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_brightness(expected)<br/>        actual = PictureService.get_brightness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_picture.py:203: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:08:20 [INFO] TestCase test_get_brightness: Test getBrightness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test isBrightnessSupported&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_is_brightness_supported</td>
+          <td class="col-duration">20.02</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1d990&gt;<br/><br/>    def test_is_brightness_supported(self):<br/>        &quot;&quot;&quot;Test isBrightnessSupported&quot;&quot;&quot;<br/>        PictureService.switch_to_android()<br/>        current = PictureService.get_current_source()<br/>        brightness_supported = PictureService.is_brightness_supported()<br/>&gt;       assert current == &quot;ANDROID&quot;<br/><span class="error">E       AssertionError: assert None == &#x27;ANDROID&#x27;</span><br/><br/>cases/test_picture.py:211: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:08:45 [INFO] TestCase test_is_brightness_supported: Test isBrightnessSupported (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSharpness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_sharpness[0]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1cac0&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test setSharpness&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_sharpness(expected)<br/>        actual = PictureService.get_sharpness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 0</span><br/><br/>cases/test_picture.py:229: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:09:05 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSharpness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_sharpness[50]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1c0d0&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test setSharpness&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_sharpness(expected)<br/>        actual = PictureService.get_sharpness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 50</span><br/><br/>cases/test_picture.py:229: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:09:30 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSharpness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_sharpness[100]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1c310&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_set_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test setSharpness&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_sharpness(expected)<br/>        actual = PictureService.get_sharpness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_picture.py:229: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:09:55 [INFO] TestCase test_set_sharpness: Test setSharpness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSharpness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_sharpness[0]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1d630&gt;, expected = 0<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test getSharpness&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_sharpness(expected)<br/>        actual = PictureService.get_sharpness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 0</span><br/><br/>cases/test_picture.py:239: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:10:20 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSharpness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_sharpness[50]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1cfd0&gt;, expected = 50<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test getSharpness&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_sharpness(expected)<br/>        actual = PictureService.get_sharpness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 50</span><br/><br/>cases/test_picture.py:239: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:10:45 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSharpness&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_sharpness[100]</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1f100&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [0, 50, 100])<br/>    def test_get_sharpness(self, expected):<br/>        &quot;&quot;&quot;Test getSharpness&quot;&quot;&quot;<br/>        PictureService.set_non_android_source_if_needed()<br/>        PictureService.set_custom_picture_mode_if_needed()<br/>        PictureService.set_sharpness(expected)<br/>        actual = PictureService.get_sharpness()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_picture.py:239: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:11:10 [INFO] TestCase test_get_sharpness: Test getSharpness (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test isSharpnessSupported&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_is_sharpness_supported</td>
+          <td class="col-duration">20.02</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1f4f0&gt;<br/><br/>    def test_is_sharpness_supported(self):<br/>        &quot;&quot;&quot;Test isSharpnessSupported&quot;&quot;&quot;<br/>        PictureService.switch_to_android()<br/>        current = PictureService.get_current_source()<br/>        sharpness_supported = PictureService.is_sharpness_supported()<br/>&gt;       assert current == &quot;ANDROID&quot;<br/><span class="error">E       AssertionError: assert None == &#x27;ANDROID&#x27;</span><br/><br/>cases/test_picture.py:247: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:11:35 [INFO] TestCase test_is_sharpness_supported: Test isSharpnessSupported (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test isColorTempSupported&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_is_color_temp_supported</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1c520&gt;<br/><br/>    def test_is_color_temp_supported(self):<br/>        &quot;&quot;&quot;Test isColorTempSupported&quot;&quot;&quot;<br/>&gt;       assert PictureService.is_color_temp_supported()<br/><span class="error">E       assert None</span><br/><span class="error">E        +  where None = &lt;function PictureService.is_color_temp_supported at 0x7dc64aa2d510&gt;()</span><br/><span class="error">E        +    where &lt;function PictureService.is_color_temp_supported at 0x7dc64aa2d510&gt; = PictureService.is_color_temp_supported</span><br/><br/>cases/test_picture.py:260: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:11:55 [INFO] TestCase test_is_color_temp_supported: Test isColorTempSupported (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setColorTemp&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_color_temp[COLOR_WARM]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1c700&gt;<br/>expected = &#x27;COLOR_WARM&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_set_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test setColorTemp&quot;&quot;&quot;<br/>        PictureService.set_color_temp(expected)<br/>        actual = PictureService.get_color_temp()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;COLOR_WARM&#x27;</span><br/><br/>cases/test_picture.py:267: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:12:00 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setColorTemp&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_color_temp[COLOR_NORMAL]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1c7f0&gt;<br/>expected = &#x27;COLOR_NORMAL&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_set_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test setColorTemp&quot;&quot;&quot;<br/>        PictureService.set_color_temp(expected)<br/>        actual = PictureService.get_color_temp()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;COLOR_NORMAL&#x27;</span><br/><br/>cases/test_picture.py:267: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:12:10 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setColorTemp&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_set_color_temp[COLOR_COLD]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1dae0&gt;<br/>expected = &#x27;COLOR_COLD&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_set_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test setColorTemp&quot;&quot;&quot;<br/>        PictureService.set_color_temp(expected)<br/>        actual = PictureService.get_color_temp()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;COLOR_COLD&#x27;</span><br/><br/>cases/test_picture.py:267: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:12:20 [INFO] TestCase test_set_color_temp: Test setColorTemp (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getColorTemp&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_color_temp[COLOR_WARM]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1dc90&gt;<br/>expected = &#x27;COLOR_WARM&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_get_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test getColorTemp&quot;&quot;&quot;<br/>        PictureService.set_color_temp(expected)<br/>        actual = PictureService.get_color_temp()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;COLOR_WARM&#x27;</span><br/><br/>cases/test_picture.py:274: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:12:30 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getColorTemp&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_color_temp[COLOR_NORMAL]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1e5f0&gt;<br/>expected = &#x27;COLOR_NORMAL&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_get_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test getColorTemp&quot;&quot;&quot;<br/>        PictureService.set_color_temp(expected)<br/>        actual = PictureService.get_color_temp()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;COLOR_NORMAL&#x27;</span><br/><br/>cases/test_picture.py:274: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:12:40 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getColorTemp&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_color_temp[COLOR_COLD]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_picture.TestPicture object at 0x7dc64bb1c4c0&gt;<br/>expected = &#x27;COLOR_COLD&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;COLOR_WARM&quot;, &quot;COLOR_NORMAL&quot;, &quot;COLOR_COLD&quot;])<br/>    def test_get_color_temp(self, expected):<br/>        &quot;&quot;&quot;Test getColorTemp&quot;&quot;&quot;<br/>        PictureService.set_color_temp(expected)<br/>        actual = PictureService.get_color_temp()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;COLOR_COLD&#x27;</span><br/><br/>cases/test_picture.py:274: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:12:50 [INFO] TestCase test_get_color_temp: Test getColorTemp (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test SetAssetTag&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_set_asset_tag[Test1]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc50df0&gt;<br/>expected = &#x27;Test1&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;Test1&quot;, 100])<br/>    def test_set_asset_tag(self, expected):<br/>        &quot;&quot;&quot;Test SetAssetTag&quot;&quot;&quot;<br/>        DelegateSystemService.set_asset_tag(expected)<br/>        actual = DelegateSystemService.get_asset_tag()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;Test1&#x27;</span><br/><br/>cases/test_system.py:20: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:13:00 [INFO] TestCase test_set_asset_tag: Test SetAssetTag (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test SetAssetTag&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_set_asset_tag[100]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc504c0&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;Test1&quot;, 100])<br/>    def test_set_asset_tag(self, expected):<br/>        &quot;&quot;&quot;Test SetAssetTag&quot;&quot;&quot;<br/>        DelegateSystemService.set_asset_tag(expected)<br/>        actual = DelegateSystemService.get_asset_tag()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_system.py:20: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:13:10 [INFO] TestCase test_set_asset_tag: Test SetAssetTag (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test GetAssetTag&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_asset_tag[Test1]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc53dc0&gt;<br/>expected = &#x27;Test1&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;Test1&quot;, 100])<br/>    def test_get_asset_tag(self, expected):<br/>        &quot;&quot;&quot;Test GetAssetTag&quot;&quot;&quot;<br/>        DelegateSystemService.set_asset_tag(expected)<br/>        actual = DelegateSystemService.get_asset_tag()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;Test1&#x27;</span><br/><br/>cases/test_system.py:27: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:13:20 [INFO] TestCase test_get_asset_tag: Test GetAssetTag (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test GetAssetTag&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_asset_tag[100]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc538e0&gt;, expected = 100<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;Test1&quot;, 100])<br/>    def test_get_asset_tag(self, expected):<br/>        &quot;&quot;&quot;Test GetAssetTag&quot;&quot;&quot;<br/>        DelegateSystemService.set_asset_tag(expected)<br/>        actual = DelegateSystemService.get_asset_tag()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == 100</span><br/><br/>cases/test_system.py:27: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:13:30 [INFO] TestCase test_get_asset_tag: Test GetAssetTag (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test get_build_number&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_build_number</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc53880&gt;<br/><br/>    def test_get_build_number(self):<br/>        &quot;&quot;&quot;Test get_build_number&quot;&quot;&quot;<br/>        actual = DelegateSystemService.get_build_number()<br/>&gt;       assert type(actual) is str, f&quot;Expected str but got {type(actual).__name__}&quot;<br/><span class="error">E       AssertionError: Expected str but got NoneType</span><br/><span class="error">E       assert &lt;class &#x27;NoneType&#x27;&gt; is str</span><br/><span class="error">E        +  where &lt;class &#x27;NoneType&#x27;&gt; = type(None)</span><br/><br/>cases/test_system.py:32: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:13:40 [INFO] TestCase test_get_build_number: Test get_build_number (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test get_serial_number&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_serial_number</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc510c0&gt;<br/><br/>    def test_get_serial_number(self):<br/>        &quot;&quot;&quot;Test get_serial_number&quot;&quot;&quot;<br/>        actual = DelegateSystemService.get_serial_number()<br/>&gt;       assert type(actual) is str, f&quot;Expected str but got {type(actual).__name__}&quot;<br/><span class="error">E       AssertionError: Expected str but got NoneType</span><br/><span class="error">E       assert &lt;class &#x27;NoneType&#x27;&gt; is str</span><br/><span class="error">E        +  where &lt;class &#x27;NoneType&#x27;&gt; = type(None)</span><br/><br/>cases/test_system.py:39: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:13:45 [INFO] TestCase test_get_serial_number: Test get_serial_number (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getRunningTime&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_running_time</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc50b80&gt;<br/><br/>    def test_get_running_time(self):<br/>        &quot;&quot;&quot;Test getRunningTime&quot;&quot;&quot;<br/>        actual = DelegateSystemService.get_running_time()<br/>&gt;       assert type(actual) is str, f&quot;Expected str but got {type(actual).__name__}&quot;<br/><span class="error">E       AssertionError: Expected str but got NoneType</span><br/><span class="error">E       assert &lt;class &#x27;NoneType&#x27;&gt; is str</span><br/><span class="error">E        +  where &lt;class &#x27;NoneType&#x27;&gt; = type(None)</span><br/><br/>cases/test_system.py:47: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:13:50 [INFO] TestCase test_get_running_time: Test getRunningTime (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test SystemPropertyString&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_system_property_string</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc53970&gt;<br/><br/>    def test_get_system_property_string(self):<br/>        &quot;&quot;&quot;Test SystemPropertyString&quot;&quot;&quot;<br/>        actual = DelegateSystemService.get_system_property_string(&quot;ro.build.version.release&quot;, &quot;unknown&quot;)<br/>&gt;       assert type(actual) is str, f&quot;Expected str but got {type(actual).__name__}&quot;<br/><span class="error">E       AssertionError: Expected str but got NoneType</span><br/><span class="error">E       assert &lt;class &#x27;NoneType&#x27;&gt; is str</span><br/><span class="error">E        +  where &lt;class &#x27;NoneType&#x27;&gt; = type(None)</span><br/><br/>cases/test_system.py:54: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:13:55 [INFO] TestCase test_get_system_property_string: Test SystemPropertyString (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test SystemPropertyInt&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_system_property_int</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc53a00&gt;<br/><br/>    def test_get_system_property_int(self):<br/>        &quot;&quot;&quot;Test SystemPropertyInt&quot;&quot;&quot;<br/>        actual = DelegateSystemService.get_system_property_int(&quot;ro.build.version.sdk&quot;, &quot;0&quot;)<br/>&gt;       assert type(actual) is int, f&quot;Expected int but got {type(actual).__name__}&quot;<br/><span class="error">E       AssertionError: Expected int but got NoneType</span><br/><span class="error">E       assert &lt;class &#x27;NoneType&#x27;&gt; is int</span><br/><span class="error">E        +  where &lt;class &#x27;NoneType&#x27;&gt; = type(None)</span><br/><br/>cases/test_system.py:59: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:14:00 [INFO] TestCase test_get_system_property_int: Test SystemPropertyInt (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test SystemPropertyLong&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_system_property_long</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc526e0&gt;<br/><br/>    def test_get_system_property_long(self):<br/>        &quot;&quot;&quot;Test SystemPropertyLong&quot;&quot;&quot;<br/>        actual = DelegateSystemService.get_system_property_long(&quot;system.uptime&quot;, &quot;0&quot;)<br/>        pattern = r&quot;^persist\.logd\.size\.system\s*=\s*(-?\d+(\.\d*)?|\.\d+)$&quot;<br/>&gt;       match = re.fullmatch(pattern, actual)<br/><br/>cases/test_system.py:65: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/><br/>pattern = &#x27;^persist\\.logd\\.size\\.system\\s*=\\s*(-?\\d+(\\.\\d*)?|\\.\\d+)$&#x27;<br/>string = None, flags = 0<br/><br/>    def fullmatch(pattern, string, flags=0):<br/>        &quot;&quot;&quot;Try to apply the pattern to all of the string, returning<br/>        a Match object, or None if no match was found.&quot;&quot;&quot;<br/>&gt;       return _compile(pattern, flags).fullmatch(string)<br/><span class="error">E       TypeError: expected string or bytes-like object</span><br/><br/>../../_tool/Python/3.10.15/x64/lib/python3.10/re.py:195: TypeError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:14:05 [INFO] TestCase test_get_system_property_long: Test SystemPropertyLong (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test SystemPropertyBoolean&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_system_property_boolean</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc52440&gt;<br/><br/>    def test_get_system_property_boolean(self):<br/>        &quot;&quot;&quot;Test SystemPropertyBoolean&quot;&quot;&quot;<br/>        is_system_property_boolean = DelegateSystemService.get_system_property_boolean(&quot;debug.enable&quot;, &quot;false&quot;)<br/>&gt;       assert (<br/>            type(is_system_property_boolean) is bool<br/>        ), f&quot;Expected bool but got {type(is_system_property_boolean).__name__}&quot;<br/><span class="error">E       AssertionError: Expected bool but got NoneType</span><br/><span class="error">E       assert &lt;class &#x27;NoneType&#x27;&gt; is bool</span><br/><span class="error">E        +  where &lt;class &#x27;NoneType&#x27;&gt; = type(None)</span><br/><br/>cases/test_system.py:71: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:14:10 [INFO] TestCase test_get_system_property_boolean: Test SystemPropertyBoolean (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSettingPasswordEnable&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_set_setting_password_enable[True]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc50af0&gt;, expected = True<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_set_setting_password_enable(self, expected):<br/>        &quot;&quot;&quot;Test setSettingPasswordEnable&quot;&quot;&quot;<br/>        DelegateSystemService.set_setting_password_enable(expected)<br/>        actual = DelegateSystemService.get_setting_password_enable()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == True</span><br/><br/>cases/test_system.py:80: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:14:16 [INFO] TestCase test_set_setting_password_enable: Test setSettingPasswordEnable (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSettingPasswordEnable&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_set_setting_password_enable[False]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc52740&gt;, expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_set_setting_password_enable(self, expected):<br/>        &quot;&quot;&quot;Test setSettingPasswordEnable&quot;&quot;&quot;<br/>        DelegateSystemService.set_setting_password_enable(expected)<br/>        actual = DelegateSystemService.get_setting_password_enable()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == False</span><br/><br/>cases/test_system.py:80: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:14:26 [INFO] TestCase test_set_setting_password_enable: Test setSettingPasswordEnable (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSettingPasswordEnable&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_setting_password_enable[True]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc52650&gt;, expected = True<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_setting_password_enable(self, expected):<br/>        &quot;&quot;&quot;Test getSettingPasswordEnable&quot;&quot;&quot;<br/>        DelegateSystemService.set_setting_password_enable(expected)<br/>        actual = DelegateSystemService.get_setting_password_enable()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == True</span><br/><br/>cases/test_system.py:87: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:14:36 [INFO] TestCase test_get_setting_password_enable: Test getSettingPasswordEnable (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSettingPasswordEnable&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_get_setting_password_enable[False]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc52110&gt;, expected = False<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [True, False])<br/>    def test_get_setting_password_enable(self, expected):<br/>        &quot;&quot;&quot;Test getSettingPasswordEnable&quot;&quot;&quot;<br/>        DelegateSystemService.set_setting_password_enable(expected)<br/>        actual = DelegateSystemService.get_setting_password_enable()<br/>&gt;       assert actual == expected<br/><span class="error">E       assert None == False</span><br/><br/>cases/test_system.py:87: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:14:46 [INFO] TestCase test_get_setting_password_enable: Test getSettingPasswordEnable (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSettingPassword&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_setting_password[1111]</td>
+          <td class="col-duration">20.02</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc51ae0&gt;<br/>expected = &#x27;1111&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;1111&quot;, &quot;0000&quot;])<br/>    def test_setting_password(self, expected):<br/>        &quot;&quot;&quot;Test setSettingPassword&quot;&quot;&quot;<br/>        DelegateSystemService.set_setting_password_enable_true()<br/>        DelegateSystemService.set_setting_password(expected)<br/>        actual = DelegateSystemService.get_setting_password()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;1111&#x27;</span><br/><br/>cases/test_system.py:95: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:14:56 [INFO] TestCase test_setting_password: Test setSettingPassword (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test setSettingPassword&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_setting_password[0000]</td>
+          <td class="col-duration">20.02</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc521d0&gt;<br/>expected = &#x27;0000&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;1111&quot;, &quot;0000&quot;])<br/>    def test_setting_password(self, expected):<br/>        &quot;&quot;&quot;Test setSettingPassword&quot;&quot;&quot;<br/>        DelegateSystemService.set_setting_password_enable_true()<br/>        DelegateSystemService.set_setting_password(expected)<br/>        actual = DelegateSystemService.get_setting_password()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;0000&#x27;</span><br/><br/>cases/test_system.py:95: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:15:16 [INFO] TestCase test_setting_password: Test setSettingPassword (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSettingPassword&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_getsetting_password[1111]</td>
+          <td class="col-duration">20.02</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc50070&gt;<br/>expected = &#x27;1111&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;1111&quot;, &quot;0000&quot;])<br/>    def test_getsetting_password(self, expected):<br/>        &quot;&quot;&quot;Test getSettingPassword&quot;&quot;&quot;<br/>        DelegateSystemService.set_setting_password_enable_true()<br/>        DelegateSystemService.set_setting_password(expected)<br/>        actual = DelegateSystemService.get_setting_password()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;1111&#x27;</span><br/><br/>cases/test_system.py:103: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:15:36 [INFO] TestCase test_getsetting_password: Test getSettingPassword (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test getSettingPassword&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_getsetting_password[0000]</td>
+          <td class="col-duration">20.02</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc51f90&gt;<br/>expected = &#x27;0000&#x27;<br/><br/>    @pytest.mark.parametrize(&quot;expected&quot;, [&quot;1111&quot;, &quot;0000&quot;])<br/>    def test_getsetting_password(self, expected):<br/>        &quot;&quot;&quot;Test getSettingPassword&quot;&quot;&quot;<br/>        DelegateSystemService.set_setting_password_enable_true()<br/>        DelegateSystemService.set_setting_password(expected)<br/>        actual = DelegateSystemService.get_setting_password()<br/>&gt;       assert actual == expected<br/><span class="error">E       AssertionError: assert None == &#x27;0000&#x27;</span><br/><br/>cases/test_system.py:103: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:15:56 [INFO] TestCase test_getsetting_password: Test getSettingPassword (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>&lt;td class=&quot;col-title&quot;&gt;Test cleanSettingPassword&lt;/td&gt;
+          <td class="col-name">cases/test_system.py::TestSystem::test_clean_setting_password</td>
+          <td class="col-duration">25.03</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">self = &lt;cases.test_system.TestSystem object at 0x7dc64bc52770&gt;<br/><br/>    def test_clean_setting_password(self):<br/>        &quot;&quot;&quot;Test cleanSettingPassword&quot;&quot;&quot;<br/>        DelegateSystemService.set_setting_password_enable_true()<br/>        DelegateSystemService.set_setting_password(&quot;1122&quot;)<br/>        DelegateSystemService.clean_setting_password()<br/>        actual = DelegateSystemService.get_setting_password()<br/>&gt;       assert actual == &quot;&quot;<br/><span class="error">E       AssertionError: assert None == &#x27;&#x27;</span><br/><br/>cases/test_system.py:111: AssertionError<br/> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 12:16:16 [INFO] TestCase test_clean_setting_password: Test cleanSettingPassword (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="skipped results-table-row">
+        <tr>
+          <td class="col-result">Skipped</td>&lt;td class=&quot;col-title&quot;&gt;Test getScreenshot&lt;/td&gt;
+          <td class="col-name">cases/test_picture.py::TestPicture::test_get_screenshot::setup</td>
+          <td class="col-duration">0.00</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">(&#x27;/home/qa/DevOps/vsts-agent-linux-x64-4.252.0/_work/4/s/cases/test_picture.py&#x27;, 13, &#x27;Skipped: api 尚未實作&#x27;)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setVolume&lt;/td&gt;
+          <td class="col-name">cases/test_audio.py::TestAudio::test_set_volume[0]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:53:13 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setVolume&lt;/td&gt;
+          <td class="col-name">cases/test_audio.py::TestAudio::test_set_volume[50]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:53:23 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test setVolume&lt;/td&gt;
+          <td class="col-name">cases/test_audio.py::TestAudio::test_set_volume[100]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:53:33 [INFO] TestCase test_set_volume: Test setVolume (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getVolume&lt;/td&gt;
+          <td class="col-name">cases/test_audio.py::TestAudio::test_get_volume[0]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:53:43 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getVolume&lt;/td&gt;
+          <td class="col-name">cases/test_audio.py::TestAudio::test_get_volume[50]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:53:53 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test getVolume&lt;/td&gt;
+          <td class="col-name">cases/test_audio.py::TestAudio::test_get_volume[100]</td>
+          <td class="col-duration">10.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:54:03 [INFO] TestCase test_get_volume: Test getVolume (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test switchToSettings&lt;/td&gt;
+          <td class="col-name">cases/test_control.py::TestControl::test_switch_to_settings[Left]</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:54:53 [INFO] TestCase test_switch_to_settings: Test switchToSettings (conftest.py:56)<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>&lt;td class=&quot;col-title&quot;&gt;Test switchToDataTimeSettings&lt;/td&gt;
+          <td class="col-name">cases/test_control.py::TestControl::test_switch_to_data_time_settings[Left]</td>
+          <td class="col-duration">5.01</td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> -------------------------------Captured log setup------------------------------- <br/>2025-11-06 11:54:58 [INFO] TestCase test_switch_to_data_time_settings: Test switchToDataTimeSettings (conftest.py:56)<br/></div></td></tr></tbody></table></body></html>
